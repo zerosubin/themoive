@@ -13,7 +13,11 @@ body {
   font-family: var(--font-nanumfont);
 }
 
+button, input {
+  font-family: var(--font-nanumfont);
+}
 
 ul {
   list-style: none;
+  color: #519cff;
 }

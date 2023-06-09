@@ -77,7 +77,6 @@ const Input = styled.input`
   border: 0;
   outline: none;
   background-color: #cfcfcf;
-  font-family: var(--font-nanumfont);
 `
 
 const LoginBtn = styled.button`
@@ -88,6 +87,5 @@ const LoginBtn = styled.button`
   background-color: #007542;
   color: #fff;
 
-  font-family: var(--font-nanumfont);
   cursor: pointer;
 `
