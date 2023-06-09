@@ -9,9 +9,9 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <PageHeader />
-      <PageNavigator /> */}
-      <div className="App">{fireStore._databaseId.projectId}</div>
+      <PageHeader />
+      <PageNavigator />
+      {/* <div className="App">{fireStore._databaseId.projectId}</div> */}
     </BrowserRouter>
   )
 }
