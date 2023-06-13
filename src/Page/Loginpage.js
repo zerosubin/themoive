@@ -1,19 +1,111 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { styled } from 'styled-components'
+import { FcGoogle } from "react-icons/fc"
 import { Link } from 'react-router-dom'
 
+import { authService, fireStore } from "../Firebase"
+import { addDoc, collection } from "firebase/firestore"
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup  } from "firebase/auth"
+
 export default function Loginpage() {
+  const [loginEmail, setloginEmail] = useState("")
+  const [loginPassword, setloginPassword] = useState("")
+
+  const login = async () => {
+    try {
+      const user = await signInWithEmailAndPassword(
+        authService,
+        loginEmail,
+        loginPassword
+      )
+      console.log(user)
+      localStorage.setItem("user", loginEmail)
+      window.location.replace("/")
+      alert('로그인에 성공하셨습니다!')
+    } catch(error){
+      switch (error.code) {
+        case "auth/wrong-password":
+          return alert("이메일 혹은 비밀번호가 일치하지 않습니다.")
+        case "auth/user-not-found":
+          return alert("해당 이메일이 없습니다. 회원가입을 해주세요.")
+        default:
+          return alert("로그인에 실패 하였습니다.")
+      }
+    }
+  }
+
+  const provider = new GoogleAuthProvider() 
+
+  const Googlelogin = async () => {
+    signInWithPopup(authService, provider)
+      .then(async (data) => {
+        localStorage.setItem("user", data.user.email)
+        window.location.assign("/")
+        return alert('구글 소셜 로그인에 성공하셨습니다!')
+      })
+      .catch((error) => {
+        switch (error.code) {
+          case "auth/user-not-found" || "auth/wrong-password":
+            return alert("이메일 혹은 비밀번호가 일치하지 않습니다.")
+          case "auth/user-not-found":
+            return alert("해당하는 이메일이 없습니다. 회원가입을 진행해주세요.")
+          default:
+            return alert("로그인에 실패 하였습니다.")
+        }
+      })
+  }
+
+  const GoogleSingup = () => {
+    signInWithPopup(authService, provider)
+    .then(async (data) => { 
+      const docRef = await addDoc(collection(fireStore, "Users"), {
+        name : data.user.displayName,
+        email : data.user.email,
+      })
+      console.log(docRef)
+      localStorage.setItem("user", data.user.email)
+      window.location.assign("/")
+      return alert('구글 소셜 회원가입에 성공하셨습니다!')
+    })
+    .catch((error) => {
+        switch (error.code) {
+          case "auth/user-not-found" || "auth/wrong-password":
+            return alert("이메일 혹은 비밀번호가 일치하지 않습니다.")
+          case "auth/user-not-found":
+            return alert("해당하는 이메일이 없습니다. 회원가입을 진행해주세요.")
+          default:
+            return alert("로그인에 실패 하였습니다.")
+        }
+      })
+
+  }
+
   return (
     <>
     <Container>
       <Login>로그인</Login>
-      <IDinput type='text' placeholder='아이디' required/>
-      <PWinput type='password' placeholder='비밀번호' required/>
-      <LoginBtn>로그인</LoginBtn>
-      <GoogleBtn>구글</GoogleBtn>
+      <IDinput type='text' placeholder='이메일'
+        onChange={(e) => {
+          setloginEmail(e.target.value)
+        }}
+      />
+      <PWinput type='password' placeholder='비밀번호'
+        onChange={(e) => {
+          setloginPassword(e.target.value)
+        }}
+      />
+      <Link to="/">
+        <LoginBtn onClick={(element) => {
+          element.preventDefault()
+          login()
+          }}>로그인</LoginBtn>
+      </Link>
+      <FcGoogle size="34" onClick={Googlelogin}></FcGoogle>
+      {/* {googleuser ? googleuser.displayName : null} */}
       <Link to="/signup" style={{ textDecoration: "none"}}>
         <SingupBtn>회원가입</SingupBtn>
       </Link>
+      <GoogleSingupBtn onClick={GoogleSingup}>구글 계정으로 회원가입</GoogleSingupBtn>
     </Container>
     </>
   )
@@ -65,19 +157,25 @@ const LoginBtn = styled.button`
 
   cursor: pointer;
 `
+// const GoogleBtn = styled.button`
+//   padding: 12px 24px;
 
-const GoogleBtn = styled.button`
-  padding: 12px 24px;
+//   border-radius: 12px;
+//   border: 0;
 
-  border-radius: 12px;
-  border: 0;
+//   background-color: #007542;
+//   color: #fff;
 
-  background-color: #007542;
-  color: #fff;
+//   cursor: pointer;
+// `
+const SingupBtn = styled.p`
+  margin: 16px 0 8px 0;
+  color: #000;
 
   cursor: pointer;
 `
-const SingupBtn = styled.p`
-  margin: 12px;
+const GoogleSingupBtn = styled.span`
   color: #000;
+
+  cursor: pointer;
 `

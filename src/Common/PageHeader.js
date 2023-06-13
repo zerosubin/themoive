@@ -1,9 +1,31 @@
 import React from 'react'
 import { styled } from 'styled-components'
 import { GiPopcorn } from "react-icons/gi"
+import { FaUserAstronaut } from "react-icons/fa"
 import { Link } from "react-router-dom"
 
+import { signOut } from 'firebase/auth'
+import { authService } from "../Firebase"
+
 export default function PageHeader() {
+
+  const user = authService.currentUser
+  console.log(user)
+
+  const Logoutbtn = async () => {
+    try {
+      await signOut(authService)
+      localStorage.removeItem("user")
+      alert('로그아웃 하셨습니다')
+      window.location.assign("/")
+    } catch (err) {
+      alert(err.message)
+    }
+  }
+
+  const naaame = localStorage.getItem("user")
+  console.log(naaame)
+
   return (
     <HeaderDIV>
       <Container>
@@ -13,19 +35,38 @@ export default function PageHeader() {
             <Title>The moive</Title>
           </Link>
           <UL>
-            <Li>
-              <Ment>방구석 평론회</Ment>
-            </Li>
-            <Li>
-              <Ment>the moives</Ment>
-            </Li>
+            <Link to="/critique" style={{ textDecoration: "none"}}>
+              <Li>
+                <Ment>방구석 평론회</Ment>
+              </Li>
+            </Link>
+            <Link to="/movies" style={{ textDecoration: "none"}}>
+              <Li>
+                <Ment>the moives</Ment>
+              </Li>
+            </Link>
           </UL>
         </TitleCon>
         <InputCon>
           <Input type="text" placeholder='영화 제목을 검색하세요!' />
-          <Link to="/login">
-            <LoginBtn>로그인</LoginBtn>
-          </Link>
+          {
+            (naaame !== null)
+            ? 
+            <>
+              <Logouthover>
+                <FaUserAstronaut size="32"/>
+                <Logout onClick={(element) => {
+                  element.preventDefault()
+                  Logoutbtn()
+                }}
+                >로그아웃</Logout>
+              </Logouthover>
+            </>
+            : 
+            <Link to="/login">
+              <LoginBtn>로그인</LoginBtn>
+            </Link>
+          }
         </InputCon>
       </Container>
     </HeaderDIV>
@@ -66,9 +107,42 @@ const Li = styled.li`
 
 const Ment = styled.span`
   cursor: pointer;
+  color: #000;
 `
 
 const InputCon = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`
+const Logout = styled.div`
+  position: absolute;
+  right: -36px;
+  top: 38px;
+
+  width: 80px;
+  heigth: 50px;
+
+  padding: 12px;
+
+  background-color: #180ed0;
+  color: #fff;
+  border: 0;
+  border-radius: 15px;
+
+  text-align: center;
+  visibility: hidden;
+`
+const Logouthover = styled.div`
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    color: #180ed0;
+  }
+  &:hover ${Logout}{
+    visibility: visible;
+  }
 `
 
 const Input = styled.input`
