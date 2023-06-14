@@ -17,7 +17,6 @@ button, input {
   font-family: var(--font-nanumfont);
 }
 
-ul {
+ul, li {
   list-style: none;
-
 }

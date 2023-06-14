@@ -75,7 +75,9 @@ export default function PageHeader() {
 
 const HeaderDIV = styled.div`
   width: 100%;
-  border-bottom: 1px groove black;
+  background-color: #f3e015;
+  position: fixed;
+  top: 0px;
 `
 
 const Container = styled.div`
