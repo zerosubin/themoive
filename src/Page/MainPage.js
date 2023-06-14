@@ -36,12 +36,23 @@ export default function MainPage() {
     }
   )
 
+  // video.documents && video.documents.forEach(element => {
+  //   const TodayurlList = element.url
+  //   const code = TodayurlList.substr(31)
+  //   codeList.push(code)
+  //   return (
+  //     <div key={element}>
+  //     </div>
+  //   )
+  // })
+
+
 
 
   const randomNum = Math.floor(Math.random() * 10)
 
   const TodayMoiveCode = codeList[randomNum]
-  const LinkScr = `https://www.youtube.com/embed/${TodayMoiveCode}`
+  const LinkScr = `https://www.youtube-nocookie.com/embed/${TodayMoiveCode}`
 
 
   return (
