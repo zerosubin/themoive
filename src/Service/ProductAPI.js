@@ -17,20 +17,12 @@ export const videoSearch = async () => {
   const config = {headers:`Authorization: KakaoAK ${REST_API_KEY}`}
   const reponse = await axios.get(url, config)
 
-  // const reponse = await axios.get(result)
   return reponse.data
 }
 
+export const MoviesList = async () => {
 
-// const Kakao = axios.create({
-//   baseURL: 'https://dapi.kakao.com', // 공통 요청 경로를 지정해준다.
-//   headers: {
-//     Authorization: `KakaoAK ${REST_API_KEY}`,
-//     query: '?sort=accuracy&size=10&query=예고편',
-//   },
-// })
-
-// // search book api
-// export const videoSearch = (params) => {
-//   return Kakao.get('/v2/search/vclip', { params })
-// }
+  const MoviesListURL = 'https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=f5eef3421c602c6cb7ea224104795888&itemPerPage=100&openStartDt=2023'
+  const reponse = await axios.get(MoviesListURL)
+  return reponse.data.movieListResult
+}

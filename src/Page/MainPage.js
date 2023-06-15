@@ -36,19 +36,6 @@ export default function MainPage() {
     }
   )
 
-  // video.documents && video.documents.forEach(element => {
-  //   const TodayurlList = element.url
-  //   const code = TodayurlList.substr(31)
-  //   codeList.push(code)
-  //   return (
-  //     <div key={element}>
-  //     </div>
-  //   )
-  // })
-
-
-
-
   const randomNum = Math.floor(Math.random() * 10)
 
   const TodayMoiveCode = codeList[randomNum]
@@ -104,6 +91,7 @@ export default function MainPage() {
 
 const Container = styled.section`
   display: grid;
+  align-items: center;
   grid-template-columns: 1.2fr 1.8fr;
 
   width: 1300px;
@@ -134,35 +122,16 @@ const Day = styled.p`
 const List = styled.ul`
   padding: 0;
 `
-// const Lank =  styled.li`
-//   display: flex;
-//   align-items: baseline;
-
-//   gap: 12px;
-//   margin: 16px 8px;
-// `
-// const NumCon =  styled.div`
-//   width: 24px;
-//   height: 24px;
-//   padding-top: 6px;
-
-//   border-radius: 8px;
-//   background-color: #1483ff;
-//   color: #fff;
-
-//   text-align: center;
-// `
-
-// const MoiveTitle = styled.span`
-// `
 
 const TodayYoutubeCon = styled.div`
-
 `
 
 const YoutuuBox =  styled.div`
   margin: 80px 40px;
   padding: 36px;
+  
+  background-color: #eee;
+  border-radius: 15px;
 `
 
 const YouCon =  styled.div`

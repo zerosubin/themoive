@@ -78,6 +78,8 @@ const HeaderDIV = styled.div`
   background-color: #f3e015;
   position: fixed;
   top: 0px;
+  
+  z-index: 1;
 `
 
 const Container = styled.div`
@@ -105,6 +107,10 @@ const UL = styled.ul`
 const Li = styled.li`
   padding: 0 18px;
   margin-top: 8px;
+  &:hover {
+    transform: scale(1.3);
+    transition: transform 0.1s ease-in-out;
+  }
 `
 
 const Ment = styled.span`
