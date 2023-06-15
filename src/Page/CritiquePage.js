@@ -5,3 +5,4 @@ export default function CritiquePage() {
     <div>CritiquePage</div>
   )
 }
+

@@ -41,4 +41,12 @@ const MoiveTitle = styled.span`
     transform: scale(1.1);
     transition: transform 0.1s ease-in-out;
   }
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-word;
+   
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical
 `
