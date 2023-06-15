@@ -30,7 +30,7 @@ export default function Movie(props) {
     <>
       <Link to={`/movies/${props.movieCd}`} style={{ textDecoration: "none"}}>
         <MovieCon>
-          <MovieImg src={lastURL && lastURL ? lastURL : 'https://placehold.co/174x249'} />
+          <MovieImg src={lastURL && lastURL ? lastURL : 'https://placehold.co/174x249?text=No Image"'} />
           <MovieTitel>
             {props.movieNm}
           </MovieTitel>
