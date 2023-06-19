@@ -1,11 +1,18 @@
 @font-face {
 	font-family: "nanumfont";
 	src: url(./assets/fonts/NanumSquareNeo-eHv.ttf);
-
+}
+@font-face {
+	font-family: 'NanumSquareNeo';
+	src: url(./assets/fonts/NanumSquareNeo-bRg.ttf);
 }
 
 :root {
   --font-nanumfont: "nanumfont"
+}
+
+:root {
+  --font-nanumfont-s: "NanumSquareNeo"
 }
 
 body {
@@ -19,4 +26,5 @@ button, input {
 
 ul, li {
   list-style: none;
+  border-right: 1px;
 }

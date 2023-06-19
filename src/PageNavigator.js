@@ -7,6 +7,7 @@ import Signuppage from "./Page/Signuppage.js"
 import CritiquePage from './Page/CritiquePage.js'
 import MoivesPage from './Page/MoivesPage.js'
 import MovieDetailPage from './Page/MovieDetailPage.js'
+import ActorPage from './Page/ActorPage.js'
 
 export default function PageNavigator() {
   return (
@@ -18,6 +19,7 @@ export default function PageNavigator() {
         <Route path="/critique" element={<CritiquePage />}></Route>
         <Route path="/movies" element={<MoivesPage />}></Route>
         <Route path="/movies/*" element={<MovieDetailPage />}></Route>
+        <Route path="/*" element={<ActorPage />}></Route>
       </Routes>
     </>
   )

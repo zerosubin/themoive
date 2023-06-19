@@ -5,7 +5,7 @@ import { styled } from 'styled-components'
 export default function Lank(props) {
   return (
     <>
-      <Link to={`/movies/${props.movieCd}`} style={{ textDecoration: "none"}}>
+      <Link to={`/movies/${props.movieCd}`} style={{ textDecoration: "none"}} state={{ code : props }}>
         <Con>
           <NumCon>{`${props.rank}`}</NumCon>
           <MoiveTitle>{props.movieNm}</MoiveTitle>

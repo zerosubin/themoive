@@ -11,8 +11,8 @@ export default function Movie(props) {
     const moviename = props.movieNm
 
     const MoviesListURL = `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=3842RN287KYH50333158&title=${moviename}`
-    const reponse = await axios.get(MoviesListURL)
-    return reponse.data.Data[0].Result[0].posters
+    const reponse = await axios?.get(MoviesListURL)
+    return reponse?.data?.Data[0]?.Result[0]?.posters
   }
 
   useEffect(() => {
@@ -23,11 +23,12 @@ export default function Movie(props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const lastURL = MoviesPoster.substr(0, 60)
+  const lastURL = MoviesPoster?.substr(0, 60)
 
+  
   return (
     <>
-      <Link to={`/movies/${props.movieCd}`} style={{ textDecoration: "none"}}>
+      <Link to={`/movies/${props.movieCd}`} style={{ textDecoration: "none"}} state={{ code : props }}>
         <MovieCon>
           <MovieImg src={lastURL && lastURL ? lastURL : 'https://placehold.co/174x249?text=No Image'} />
           <MovieTitel>

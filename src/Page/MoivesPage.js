@@ -4,8 +4,14 @@ import Movie from "../Detail/Movie"
 import axios from "axios"
 import { CgSearchLoading } from "react-icons/cg"
 import { useInView } from "react-intersection-observer"
+import { useLocation } from "react-router-dom"
 
 export default function MoivesPage() {
+  const location = useLocation()
+  const word = location?.state?.code
+
+  console.log(word)
+
   const [ThemoviesLists, setThemoviesLists] = useState([])
   const [page, setPage] = useState(1)
 
@@ -13,18 +19,16 @@ export default function MoivesPage() {
 
   const MoviesList = () => {
     axios
-      .get(`https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=f5eef3421c602c6cb7ea224104795888&curPage=${page}&itemPerPage=100&openStartDt=2023`)
+      .get(`https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=f5eef3421c602c6cb7ea224104795888&curPage=${page}&itemPerPage=100&openStartDt=${word && word ? '' : '2023'}&movieNm=${word && word ? word : ''}`)
       .then((res) => {
-        console.log(res.data.movieListResult.movieList)
+        console.log(res?.data?.movieListResult?.movieList)
         console.log(page)
-        const next = res.data.movieListResult.movieList
+        const next = res?.data?.movieListResult?.movieList
         setThemoviesLists([...ThemoviesLists, ...next])
         setPage((page) => page + 1)
       })
       .catch((err) => {console.log(err)})
   }
-
-  console.log()
 
   useEffect(() => {
     if (inView) {
@@ -37,10 +41,10 @@ export default function MoivesPage() {
   const newlist = []
 
   // eslint-disable-next-line array-callback-return
-  ThemoviesLists && ThemoviesLists.map((product, _$) => {
-    const genreAlt = product.genreAlt
+  ThemoviesLists && ThemoviesLists?.map((product, _$) => {
+    const genreAlt = product?.genreAlt
     if(!genreAlt.includes('성인물(에로)')) {
-      newlist.push(product)
+      newlist?.push(product)
     }
   })
   console.log(newlist)
@@ -48,6 +52,9 @@ export default function MoivesPage() {
   return (
     <Container>
       <Title>the movies</Title>
+      {
+        word ? <Searchment>'{word}'의 검색 결과</Searchment> : ''
+      }
       <MoiveList>
         {
           newlist && newlist.map((product, index) => {
@@ -65,6 +72,12 @@ export default function MoivesPage() {
 const Container = styled.section`
   width: 1300px;
   margin: 130px auto;
+`
+const Searchment =  styled.h3`
+  margin: 28px auto;
+  padding: 6px;
+  text-align: center;
+  font-size: 24px;
 `
 
 const Title =  styled.h2`

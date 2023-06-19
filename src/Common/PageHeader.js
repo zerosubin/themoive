@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import { styled } from 'styled-components'
 import { GiPopcorn } from "react-icons/gi"
 import { FaUserAstronaut } from "react-icons/fa"
@@ -7,7 +7,11 @@ import { Link } from "react-router-dom"
 import { signOut } from 'firebase/auth'
 import { authService } from "../Firebase"
 
+
+
 export default function PageHeader() {
+  const [search, setSearch] = useState('')
+  const inputRef = useRef(null)
 
   const user = authService.currentUser
   console.log(user)
@@ -24,7 +28,12 @@ export default function PageHeader() {
   }
 
   const naaame = localStorage.getItem("user")
-  console.log(naaame)
+  
+  const SearchBtnClick = () => {
+    console.log(search)
+    inputRef.current.value = ""
+    window.location.replace('/movies')
+  }
 
   return (
     <HeaderDIV>
@@ -48,7 +57,17 @@ export default function PageHeader() {
           </UL>
         </TitleCon>
         <InputCon>
-          <Input type="text" placeholder='영화 제목을 검색하세요!' />
+        <Input type="text" placeholder='영화 제목을 검색하세요!'
+            onChange={(e) => {
+              setSearch(e.target.value)
+            }} 
+            ref={inputRef}
+        />
+        <Link to={'/movies'} state={{ code : search }}>
+          <SearchBtn onClick={SearchBtnClick}
+            disabled={search.length === 0}>검색
+          </SearchBtn>
+        </Link>
           {
             (naaame !== null)
             ? 
@@ -160,13 +179,23 @@ const Input = styled.input`
   outline: none;
   background-color: #cfcfcf;
 `
+const SearchBtn =  styled.button`
+  margin: 2px;
+  padding: 10px;
+  border-radius: 12px;
+  border: 0;
+  background-color: #000;
+  color: #fff;
+
+  cursor: pointer;
+`
 
 const LoginBtn = styled.button`
   margin: 8px;
   padding: 14px;
   border-radius: 12px;
   border: 0;
-  background-color: #007542;
+  background-color: #1483ff;
   color: #fff;
 
   cursor: pointer;

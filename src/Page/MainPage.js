@@ -30,7 +30,7 @@ export default function MainPage() {
 
   // eslint-disable-next-line array-callback-return
   video.documents && video.documents.map((product, _$) => {
-    const TodayurlList = product.url
+    const TodayurlList = product.url + "";
     const code = TodayurlList.substr(31)
     codeList.push(code)
     }
@@ -57,7 +57,7 @@ export default function MainPage() {
               })
             } */}
             {
-              BoxOffice.dailyBoxOfficeList && BoxOffice.dailyBoxOfficeList.map((product, index) => {
+              BoxOffice?.dailyBoxOfficeList && BoxOffice?.dailyBoxOfficeList.map((product, index) => {
                 return (
                   <>
                       <Lank key={`${product.rnum}_${index}`} rank={product.rank} 
