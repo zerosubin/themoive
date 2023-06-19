@@ -51,7 +51,9 @@ export default function PageHeader() {
             </Link>
             <Link to="/movies" style={{ textDecoration: "none"}}>
               <Li>
-                <Ment>the moives</Ment>
+                <Ment onClick={() => {
+                  window.location.replace('/movies')
+                }}>the moives</Ment>
               </Li>
             </Link>
           </UL>
