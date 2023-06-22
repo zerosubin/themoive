@@ -31,9 +31,9 @@ export default function Movie(props) {
       <Link to={`/movies/${props.movieCd}`} style={{ textDecoration: "none"}} state={{ code : props }}>
         <MovieCon>
           <MovieImg src={lastURL && lastURL ? lastURL : 'https://placehold.co/174x249?text=No Image'} />
-          <MovieTitel>
+          <MovieTitle>
             {props.movieNm}
-          </MovieTitel>
+          </MovieTitle>
         </MovieCon>
       </Link>
     </>
@@ -41,10 +41,14 @@ export default function Movie(props) {
 }
 
 const MovieCon =  styled.div`
+  max-width: 186px;
+  min-width: 186px;
   height: 280px;
   padding: 20px;
+  margin: 22px 12px;
 
   border: 1px solid #eaeaea;
+  background-color: #fff;
 
   &:hover {
     transform: scale(1.2);
@@ -60,7 +64,7 @@ const MovieImg = styled.img`
   min-height: 249.73px;
 `
 
-const MovieTitel = styled.h4`
+const MovieTitle = styled.h4`
   color: #000;
   text-align: center;
   font-size: 18px;
@@ -72,5 +76,5 @@ const MovieTitel = styled.h4`
    
   display: -webkit-box;
   -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical
+  -webkit-box-orient: vertical;
 `

@@ -5,6 +5,7 @@ import axios from "axios"
 import { CgSearchLoading } from "react-icons/cg"
 import { useInView } from "react-intersection-observer"
 import { useLocation } from "react-router-dom"
+import { Desktop, Tablet, Mobile } from "../Mediaquery"
 
 export default function MoivesPage() {
   const location = useLocation()
@@ -50,27 +51,63 @@ export default function MoivesPage() {
   console.log(newlist)
 
   return (
-    <Container>
-      <Title>the movies</Title>
-      {
-        word ? <Searchment>'{word}'의 검색 결과</Searchment> : ''
-      }
-      <MoiveList>
-        {
-          newlist && newlist.map((product, index) => {
-            return (
-              <Movie key={`${product.movieCd}_${index}`} movieNm={product.movieNm} movieCd={product.movieCd} />
-            )
-          })
-        }
-      </MoiveList>
-      <NextCon ref={ref} ><CgSearchLoading size={24}/><Lastment>And more...</Lastment></NextCon>
-    </Container>
+    <>
+      <Desktop>
+        <>
+          <Container>
+            <Title>the movies</Title>
+            { word ? <Searchment>'{word}'의 검색 결과</Searchment> : ''}
+            <MoiveList>
+              {
+                newlist && newlist.map((product, index) => {
+                  return (
+                    <Movie key={`${product.movieCd}_${index}`} movieNm={product.movieNm} movieCd={product.movieCd} />
+                  )
+                })
+              }
+            </MoiveList>
+            <NextCon ref={ref}><CgSearchLoading size={24} /><Lastment>And more...</Lastment></NextCon>
+          </Container>
+        </>
+      </Desktop>
+      <Tablet>
+        <>
+          <Container>
+            <Title>the movies</Title>
+            {word ? <Searchment>'{word}'의 검색 결과</Searchment> : ''}
+            <MoiveListTablet>
+              {newlist && newlist.map((product, index) => {
+                return (
+                  <Movie key={`${product.movieCd}_${index}`} movieNm={product.movieNm} movieCd={product.movieCd} />
+                )
+              })}
+            </MoiveListTablet>
+            <NextCon ref={ref}><CgSearchLoading size={24} /><Lastment>And more...</Lastment></NextCon>
+          </Container>
+        </>
+      </Tablet>
+      <Mobile>
+        <>
+          <Container>
+            <Title>the movies</Title>
+            {word ? <Searchment>'{word}'의 검색 결과</Searchment> : ''}
+            <MoiveListMobile>
+              {newlist && newlist.map((product, index) => {
+                return (
+                  <Movie key={`${product.movieCd}_${index}`} movieNm={product.movieNm} movieCd={product.movieCd} />
+                )
+              })}
+            </MoiveListMobile>
+            <NextCon ref={ref}><CgSearchLoading size={24} /><Lastment>And more...</Lastment></NextCon>
+          </Container>
+        </>
+      </Mobile>
+    </>
   )
 }
 
 const Container = styled.section`
-  width: 1300px;
+  max-width: 1300px;
   margin: 130px auto;
 `
 const Searchment =  styled.h3`
@@ -79,21 +116,37 @@ const Searchment =  styled.h3`
   text-align: center;
   font-size: 24px;
 `
-
 const Title =  styled.h2`
-  margin: 34px 0 46px 24px;
+  margin: 34px 24px 24px 24px;
+  padding-bottom: 46px;
   text-align: center;
+  border-bottom: 1px dashed #cfcfcf;
 `
-
 const MoiveList =  styled.div`
-  width: 100%;
-  heidth: 100%;
   margin: 0 auto;
 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  gap: 50px;
+  justify-items: center;
 `
+
+const MoiveListTablet =  styled.div`
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+`
+
+const MoiveListMobile =  styled.div`
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+`
+
+
 const NextCon =  styled.button`
   display: flex;
   align-items: center;

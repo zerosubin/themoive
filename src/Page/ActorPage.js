@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from "axios"
 import { styled } from 'styled-components'
 import { useLocation } from "react-router-dom"
+import { Desktop, Tablet, Mobile } from "../Mediaquery"
 
 export default function ActorPage() {
   const [actorname, setActorname] = useState("")
@@ -28,7 +29,7 @@ export default function ActorPage() {
   const REST_API_KEY = `7699edf46f6cd8691ad147c5e3c03c70`
 
   const imgSearch = async () => {
-    const query = `배우 ${Name}`
+    const query = `${Name}`
   
     const url = `https://dapi.kakao.com/v2/search/image?query=${query}&page=1&size=1`
     const config = {headers:`Authorization: KakaoAK ${REST_API_KEY}`}
@@ -53,32 +54,92 @@ export default function ActorPage() {
   const lastlist = list.split('|')
 
   return (
-    <Container>
-      <ImgCon>
-        <Img src={ImageURL && ImageURL ? ImageURL : 'https://placehold.co/174x249?text=No Image'} alt='이미지를 찾을 수 없습니다.' />
-      </ImgCon>
-      <DetailCon>
-        <ActorName>{Name} ({actorname.peopleNmEn}) </ActorName>
-        {/* ({lastdosc.peopleNmEn}) */}
-        <Title>직업</Title>
-        <Dosc>
-          <Ment>{actorname.repRoleNm}</Ment>
-        </Dosc>
+    <>
+      <Desktop>
+        <Container>
+          <ImgCon>
+            <Img src={ImageURL && ImageURL ? ImageURL : 'https://placehold.co/174x249?text=No Image'} alt='이미지를 찾을 수 없습니다.' />
+          </ImgCon>
+          <DetailCon>
+            <ActorName>{Name} ({actorname.peopleNmEn}) </ActorName>
+            {/* ({lastdosc.peopleNmEn}) */}
+            <Title>직업</Title>
+            <Dosc>
+              <Ment>{actorname.repRoleNm}</Ment>
+            </Dosc>
 
-        <Title>필모그래피</Title>
-        <Dosc>
-          {/* <Ment>{actorname.filmoNames}</Ment> */}
-          {
-            lastlist && lastlist.map((product, index) => {
-              return (
-                <Ment>{product},</Ment>
-              )
-            })
-          }
-          <Ment>...</Ment>
-        </Dosc>
-      </DetailCon>
-    </Container>
+            <Title>필모그래피</Title>
+            <Dosc>
+              {/* <Ment>{actorname.filmoNames}</Ment> */}
+              {
+                lastlist && lastlist.map((product, index) => {
+                  return (
+                    <Ment>{product},</Ment>
+                  )
+                })
+              }
+              <Ment>...</Ment>
+            </Dosc>
+          </DetailCon>
+        </Container>
+      </Desktop>
+      <Tablet>
+        <ContainerTablet>
+          <ImgConTablet>
+            <Img src={ImageURL && ImageURL ? ImageURL : 'https://placehold.co/174x249?text=No Image'} alt='이미지를 찾을 수 없습니다.' />
+          </ImgConTablet>
+          <DetailCon>
+            <ActorName>{Name} ({actorname.peopleNmEn}) </ActorName>
+            {/* ({lastdosc.peopleNmEn}) */}
+            <Title>직업</Title>
+            <Dosc>
+              <Ment>{actorname.repRoleNm}</Ment>
+            </Dosc>
+
+            <Title>필모그래피</Title>
+            <Dosc>
+              {/* <Ment>{actorname.filmoNames}</Ment> */}
+              {
+                lastlist && lastlist.map((product, index) => {
+                  return (
+                    <Ment>{product},</Ment>
+                  )
+                })
+              }
+              <Ment>...</Ment>
+            </Dosc>
+          </DetailCon>
+        </ContainerTablet>
+      </Tablet>
+      <Mobile>
+        <ContainerMobile>
+          <ImgConMobile>
+            <Img src={ImageURL && ImageURL ? ImageURL : 'https://placehold.co/174x249?text=No Image'} alt='이미지를 찾을 수 없습니다.' />
+          </ImgConMobile>
+          <DetailCon>
+            <ActorName>{Name} ({actorname.peopleNmEn}) </ActorName>
+            {/* ({lastdosc.peopleNmEn}) */}
+            <Title>직업</Title>
+            <Dosc>
+              <Ment>{actorname.repRoleNm}</Ment>
+            </Dosc>
+
+            <Title>필모그래피</Title>
+            <Dosc>
+              {/* <Ment>{actorname.filmoNames}</Ment> */}
+              {
+                lastlist && lastlist.map((product, index) => {
+                  return (
+                    <Ment>{product},</Ment>
+                  )
+                })
+              }
+              <Ment>...</Ment>
+            </Dosc>
+          </DetailCon>
+        </ContainerMobile>
+      </Mobile>
+    </>
   )
 }
 
@@ -89,11 +150,36 @@ const Container = styled.section`
   display: grid;
   grid-template-columns: 0.5fr 1fr;
 `
+
+const ContainerTablet = styled.section`
+  margin: 150px auto;
+
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
+  align-items: start;
+`
+
+const ContainerMobile = styled.section`
+  margin: 150px auto;
+
+  display: grid;
+  grid-template-rows: 0.5fr 1fr;
+  align-items: start;
+  justify-items: center;
+`
+
 const ImgCon =  styled.div`
   padding: 18px;
   max-heigth: 300px;
 `
-
+const ImgConTablet = styled.div`
+  padding: 18px;
+  min-width: 300px;
+`
+const ImgConMobile = styled.div`
+  padding: 18px;
+  max-width: 300px;
+`
 const Img = styled.img`
   width: 100%;
   heigth: 100%;

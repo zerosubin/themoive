@@ -3,6 +3,7 @@ import axios from "axios"
 import { styled } from 'styled-components'
 import { useLocation } from "react-router-dom"
 import Actor from '../Detail/Actor'
+import { Desktop, Tablet, Mobile } from "../Mediaquery"
 
 export default function MovieDetailPage() {
   const [MoviesPoster, setMoviesPoster] = useState("")
@@ -52,70 +53,207 @@ export default function MovieDetailPage() {
   console.log(CODE.actors)
 
   return (
-    <Container>
-      <ImgCon>
-        <Imgdiv>
-          <Img src={lastURL && lastURL ? lastURL : 'https://placehold.co/174x249?text=No Image'}/>
-        </Imgdiv>
-      </ImgCon>
-      <MovieDosc>
-        <Name>{MovieName}</Name>
+    <>
+      <Desktop>
+        <Container>
+          <ImgCon>
+            <Imgdiv>
+              <Img src={lastURL && lastURL ? lastURL : 'https://placehold.co/174x249?text=No Image'}/>
+            </Imgdiv>
+          </ImgCon>
+          <MovieDosc>
+            <Name>{MovieName}</Name>
 
-        <Title>개봉일</Title>
-        <Opendate>
-          <Namespan>
-            {year}.{month}.{day}
-          </Namespan>
-        </Opendate>
+            <Title>개봉일</Title>
+            <Opendate>
+              <Namespan>
+                {year}.{month}.{day}
+              </Namespan>
+            </Opendate>
 
-        <Title>장르</Title>
-        <Genres>
-            {
-              CODE.genres && CODE.genres.map((product, index) => {
-                return (
-                  <Namespan key={index}>
-                    {product.genreNm}
-                  </Namespan>
-                )
-              })
-            } 
-        </Genres>
+            <Title>장르</Title>
+            <Genres>
+                {
+                  CODE.genres && CODE.genres.map((product, index) => {
+                    return (
+                      <Namespan key={index}>
+                        {product.genreNm}
+                      </Namespan>
+                    )
+                  })
+                } 
+            </Genres>
 
-        <Title>상영시간</Title>
-        <ShowTm>
-          <Namespan>{MovieshowTm}분</Namespan>
-        </ShowTm>
+            <Title>상영시간</Title>
+            <ShowTm>
+              <Namespan>{MovieshowTm}분</Namespan>
+            </ShowTm>
 
-        <Title>감독</Title>
-        <Director>
-            {
-              CODE.directors && CODE.directors.map((product, index) => {
-                return (
-                  <Namespan key={index}>
-                    {product.peopleNm}
-                  </Namespan>
-                )
-              })
-            } 
-        </Director>
+            <Title>감독</Title>
+            <Director>
+                {
+                  CODE.directors && CODE.directors.map((product, index) => {
+                    return (
+                      <Namespan key={index}>
+                        {product.peopleNm}
+                      </Namespan>
+                    )
+                  })
+                } 
+            </Director>
 
-        <Title>출연진</Title>
-        <Actors>
-            {
-              CODE.actors
-              ?
-              CODE.actors && CODE.actors.map((product, index) => {
-                return (
-                  <Actor key={index} peopleNm={product.peopleNm} 
-                  cast={product.cast} MovieName={MovieName} />
-                )
-              })
-              :
-              <Namespan>출연진 정보 없음</Namespan>
-            } 
-        </Actors>
-      </MovieDosc>
-    </Container>
+            <Title>출연진</Title>
+            <Actors>
+              {
+                CODE.actors
+                ?
+                CODE.actors && CODE.actors.map((product, index) => {
+                  return (
+                    <Actor key={index} peopleNm={product.peopleNm} 
+                    cast={product.cast} MovieName={MovieName} />
+                  )
+                })
+                :
+                <Namespan>출연진 정보 없음</Namespan>
+              } 
+            </Actors>
+          </MovieDosc>
+        </Container>
+      </Desktop>
+      <Tablet>
+        <ContainerTablet>
+          <ImgCon>
+            <ImgdivTablet>
+              <Img src={lastURL && lastURL ? lastURL : 'https://placehold.co/174x249?text=No Image'}/>
+            </ImgdivTablet>
+          </ImgCon>
+          <MovieDosc>
+            <Name>{MovieName}</Name>
+
+            <Title>개봉일</Title>
+            <Opendate>
+              <Namespan>
+                {year}.{month}.{day}
+              </Namespan>
+            </Opendate>
+
+            <Title>장르</Title>
+            <Genres>
+                {
+                  CODE.genres && CODE.genres.map((product, index) => {
+                    return (
+                      <Namespan key={index}>
+                        {product.genreNm}
+                      </Namespan>
+                    )
+                  })
+                } 
+            </Genres>
+
+            <Title>상영시간</Title>
+            <ShowTm>
+              <Namespan>{MovieshowTm}분</Namespan>
+            </ShowTm>
+
+            <Title>감독</Title>
+            <Director>
+                {
+                  CODE.directors && CODE.directors.map((product, index) => {
+                    return (
+                      <Namespan key={index}>
+                        {product.peopleNm}
+                      </Namespan>
+                    )
+                  })
+                } 
+            </Director>
+
+            <Title>출연진</Title>
+            <Actors>
+              {
+                CODE.actors
+                ?
+                CODE.actors && CODE.actors.map((product, index) => {
+                  return (
+                    <Actor key={index} peopleNm={product.peopleNm} 
+                    cast={product.cast} MovieName={MovieName} />
+                  )
+                })
+                :
+                <Namespan>출연진 정보 없음</Namespan>
+              } 
+            </Actors>
+          </MovieDosc>
+        </ContainerTablet>
+      </Tablet>
+      <Mobile>
+        <ContainerMobile>
+          <ImgCon>
+            <ImgdivMobile>
+              <Img src={lastURL && lastURL ? lastURL : 'https://placehold.co/174x249?text=No Image'}/>
+            </ImgdivMobile>
+          </ImgCon>
+          <MovieDosc>
+            <Name>{MovieName}</Name>
+
+            <Title>개봉일</Title>
+            <Opendate>
+              <Namespan>
+                {year}.{month}.{day}
+              </Namespan>
+            </Opendate>
+
+            <Title>장르</Title>
+            <Genres>
+                {
+                  CODE.genres && CODE.genres.map((product, index) => {
+                    return (
+                      <Namespan key={index}>
+                        {product.genreNm}
+                      </Namespan>
+                    )
+                  })
+                } 
+            </Genres>
+
+            <Title>상영시간</Title>
+            <ShowTm>
+              <Namespan>{MovieshowTm}분</Namespan>
+            </ShowTm>
+
+            <Title>감독</Title>
+            <Director>
+                {
+                  CODE.directors && CODE.directors.map((product, index) => {
+                    return (
+                      <Namespan key={index}>
+                        {product.peopleNm}
+                      </Namespan>
+                    )
+                  })
+                } 
+            </Director>
+
+            <Title>출연진</Title>
+            <Actors>
+              {
+                CODE.actors
+                ?
+                CODE.actors && CODE.actors.map((product, index) => {
+                  return (
+                    <Actor key={index} peopleNm={product.peopleNm} 
+                    cast={product.cast} MovieName={MovieName} />
+                  )
+                })
+                :
+                <Namespan>출연진 정보 없음</Namespan>
+              } 
+            </Actors>
+          </MovieDosc>
+        </ContainerMobile>
+      </Mobile>
+    </>
+
   )
 }
 // {product.peopleNm}_{product.cast}
@@ -128,11 +266,35 @@ const Container = styled.section`
 
   border-radius: 24px;
 `
+const ContainerTablet = styled.section`
+  margin: 130px auto;
+
+  display: grid;
+  grid-template-columns: 0.4fr 0.8fr;
+
+  border-radius: 24px;
+`
+const ContainerMobile = styled.section`
+  margin: 130px auto;
+
+  display: grid;
+  justify-items: center;
+  grid-template-rows: 0.1fr 0.2fr;
+
+  border-radius: 24px;
+`
 
 const Imgdiv = styled.div`
 `
 const ImgCon = styled.div`
   padding: 28px;
+`
+
+const ImgdivTablet = styled.div`
+  min-width: 250px;
+`
+const ImgdivMobile = styled.div`
+  max-width: 280px;
 `
 
 const Img = styled.img`

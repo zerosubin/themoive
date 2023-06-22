@@ -7,11 +7,13 @@ import { Link } from "react-router-dom"
 import { signOut } from 'firebase/auth'
 import { authService } from "../Firebase"
 
+import { Desktop, Tablet, Mobile } from "../Mediaquery"
 
 
 export default function PageHeader() {
   const [search, setSearch] = useState('')
   const inputRef = useRef(null)
+  const [Popup, setPopup] = useState(false)
 
   const user = authService.currentUser
   console.log(user)
@@ -35,61 +37,180 @@ export default function PageHeader() {
     window.location.replace('/movies')
   }
 
+  const ClickLogo = (e) => {
+    if(Popup===false){
+      setPopup(true)
+      }else{
+      setPopup(false)
+      }
+  }
+
   return (
     <HeaderDIV>
       <Container>
-        <TitleCon>
-          <GiPopcorn size="32"/>
-          <Link to="/" style={{ textDecoration: "none"}}>
-            <Title>The moive</Title>
-          </Link>
-          <UL>
-            <Link to="/critique" style={{ textDecoration: "none"}}>
-              <Li>
-                <Ment>방구석 평론회</Ment>
-              </Li>
-            </Link>
-            <Link to="/movies" style={{ textDecoration: "none"}}>
-              <Li>
-                <Ment onClick={() => {
-                  window.location.replace('/movies')
-                }}>the moives</Ment>
-              </Li>
-            </Link>
-          </UL>
-        </TitleCon>
-        <InputCon>
-        <Input type="text" placeholder='영화 제목을 검색하세요!'
-            onChange={(e) => {
-              setSearch(e.target.value)
-            }} 
-            ref={inputRef}
-        />
-        <Link to={'/movies'} state={{ code : search }}>
-          <SearchBtn onClick={SearchBtnClick}
-            disabled={search.length === 0}>검색
-          </SearchBtn>
-        </Link>
-          {
-            (naaame !== null)
-            ? 
-            <>
-              <Logouthover>
-                <FaUserAstronaut size="32"/>
-                <Logout onClick={(element) => {
-                  element.preventDefault()
-                  Logoutbtn()
-                }}
-                >로그아웃</Logout>
-              </Logouthover>
-            </>
-            : 
-            <Link to="/login">
-              <LoginBtn>로그인</LoginBtn>
-            </Link>
-          }
-        </InputCon>
+        <Desktop>
+        <>
+            <TitleCon>
+              <GiPopcorn size="32"/>
+              <Link to="/" style={{ textDecoration: "none"}}>
+                <Title>The moive</Title>
+              </Link>
+              <UL>
+                <Link to="/critique" style={{ textDecoration: "none"}}>
+                  <Li>
+                    <Ment>방구석 평론회</Ment>
+                  </Li>
+                </Link>
+                <Link to="/movies" style={{ textDecoration: "none"}}>
+                  <Li>
+                    <Ment onClick={() => {
+                      window.location.replace('/movies')
+                    }}>the moives</Ment>
+                  </Li>
+                </Link>
+              </UL>
+            </TitleCon>
+            <InputCon>
+              <Input type="text" placeholder='영화 제목을 검색하세요!'
+                  onChange={(e) => {
+                    setSearch(e.target.value)
+                  }} 
+                  ref={inputRef}
+              />
+              <Link to={'/movies'} state={{ code : search }}>
+                <SearchBtn onClick={SearchBtnClick}
+                  disabled={search.length === 0}>검색
+                </SearchBtn>
+              </Link>
+              {
+                (naaame !== null)
+                ? 
+                <>
+                  <Logouthover>
+                    <FaUserAstronaut size="32"/>
+                    <Logout onClick={(element) => {
+                      element.preventDefault()
+                      Logoutbtn()
+                    }}
+                    >로그아웃</Logout>
+                  </Logouthover>
+                </>
+                : 
+                <Link to="/login">
+                  <LoginBtn>로그인</LoginBtn>
+                </Link>
+              }
+            </InputCon>
+          </>
+        </Desktop>
+        <Tablet>
+        <>
+            <TitleCon>
+              <GiPopcorn size="32" onClick={ClickLogo} />
+              <Link to="/" style={{ textDecoration: "none"}}>
+                <Title>The moive</Title>
+              </Link>
+            </TitleCon>
+            <InputCon>
+              <Input type="text" placeholder='영화 제목 검색!'
+                  onChange={(e) => {
+                    setSearch(e.target.value)
+                  }} 
+                  ref={inputRef}
+              />
+              <Link to={'/movies'} state={{ code : search }}>
+                <SearchBtn onClick={SearchBtnClick}
+                  disabled={search.length === 0}>검색
+                </SearchBtn>
+              </Link>
+              {
+                (naaame !== null)
+                ? 
+                <>
+                  <Logouthover>
+                    <FaUserAstronaut size="32"/>
+                    <Logout onClick={(element) => {
+                      element.preventDefault()
+                      Logoutbtn()
+                    }}
+                    >로그아웃</Logout>
+                  </Logouthover>
+                </>
+                : 
+                <Link to="/login">
+                  <LoginBtn>로그인</LoginBtn>
+                </Link>
+              }
+            </InputCon>
+          </>
+        </Tablet>
+        <Mobile>
+        <>
+            <TitleCon>
+              <GiPopcorn size="32" onClick={ClickLogo} />
+              <Link to="/" style={{ textDecoration: "none"}}>
+                <Title>The moive</Title>
+              </Link>
+            </TitleCon>
+            <InputCon>
+              {
+                (naaame !== null)
+                ? 
+                <>
+                  <Logouthover>
+                    <FaUserAstronaut size="32"/>
+                    <Logout onClick={(element) => {
+                      element.preventDefault()
+                      Logoutbtn()
+                    }}
+                    >로그아웃</Logout>
+                  </Logouthover>
+                </>
+                : 
+                <Link to="/login">
+                  <LoginBtn>로그인</LoginBtn>
+                </Link>
+              }
+            </InputCon>
+          </>
+        </Mobile>
       </Container>
+        {
+          Popup
+          ?
+          <PopupCon>
+              <Input type="text" placeholder='영화 제목 검색!'
+                  onChange={(e) => {
+                    setSearch(e.target.value)
+                  }}
+                  ref={inputRef}
+              />
+              <Link to={'/movies'} state={{ code : search }}>
+                <SearchBtnPopup onClick={() => {
+                  SearchBtnClick()
+                  ClickLogo()
+                }}
+                  disabled={search.length === 0}>검색
+                </SearchBtnPopup>
+              </Link>
+              <UL>
+                <Link to="/critique" style={{ textDecoration: "none"}}>
+                  <Li onClick={ClickLogo}>
+                    <Ment>방구석 평론회</Ment>
+                  </Li>
+                </Link>
+                <Link to="/movies" style={{ textDecoration: "none"}}>
+                  <Li onClick={ClickLogo}>
+                    <Ment onClick={() => {
+                      window.location.replace('/movies')
+                    }}>the moives</Ment>
+                  </Li>
+                </Link>
+              </UL>
+          </PopupCon> 
+          :
+          null
+        }
     </HeaderDIV>
   )
 }
@@ -113,7 +234,10 @@ const Container = styled.div`
 const TitleCon = styled.div`
   display: flex;
   align-items: center;
+
+  hieght: 35px;
 `
+
 const Title = styled.h1`
   padding: 0 8px;
   cursor: pointer;
@@ -181,6 +305,8 @@ const Input = styled.input`
   outline: none;
   background-color: #cfcfcf;
 `
+
+
 const SearchBtn =  styled.button`
   margin: 2px;
   padding: 10px;
@@ -199,6 +325,40 @@ const LoginBtn = styled.button`
   border: 0;
   background-color: #1483ff;
   color: #fff;
+
+  cursor: pointer;
+`
+
+const PopupCon = styled.div`
+  border: 1px dashed black;
+  background-color: #fff;
+  border-radius: 12px;
+
+  width: 300px;
+  heigth: 300px;
+
+  position: fixed;
+  top: 60px;
+  left: 56px;
+
+  padding: 8px;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`
+
+const SearchBtnPopup = styled.button`
+  margin: 2px;
+  padding: 10px;
+  border-radius: 12px;
+  border: 0;
+  background-color: #000;
+  color: #fff;
+
+  position: fixed;
+  top: 68px;
+  left: 314px;
 
   cursor: pointer;
 `
