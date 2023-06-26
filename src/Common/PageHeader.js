@@ -32,13 +32,12 @@ export default function PageHeader() {
   const naaame = localStorage.getItem("user")
   
   const SearchBtnClick = () => {
-    console.log(search)
     inputRef.current.value = ""
     window.location.replace('/movies')
   }
 
-  const ClickLogo = (e) => {
-    if(Popup===false){
+  const ClickLogo = () => {
+    if(Popup === false){
       setPopup(true)
       }else{
       setPopup(false)
@@ -74,7 +73,7 @@ export default function PageHeader() {
               <Input type="text" placeholder='영화 제목을 검색하세요!'
                   onChange={(e) => {
                     setSearch(e.target.value)
-                  }} 
+                  }}
                   ref={inputRef}
               />
               <Link to={'/movies'} state={{ code : search }}>
