@@ -7,11 +7,11 @@ import { useInView } from "react-intersection-observer"
 import { useLocation } from "react-router-dom"
 import { Desktop, Tablet, Mobile } from "../Mediaquery"
 
-export default function MoivesPage() {
+export default function MoivesPage(props) {
   const location = useLocation()
   const word = location?.state?.code
 
-  console.log(word)
+  console.log(props)
 
   const [ThemoviesLists, setThemoviesLists] = useState([])
   const [page, setPage] = useState(1)

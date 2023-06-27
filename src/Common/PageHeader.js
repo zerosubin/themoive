@@ -73,6 +73,7 @@ export default function PageHeader() {
               <Input type="text" placeholder='영화 제목을 검색하세요!'
                   onChange={(e) => {
                     setSearch(e.target.value)
+                    console.log(search)
                   }}
                   ref={inputRef}
               />

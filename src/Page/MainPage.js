@@ -107,7 +107,7 @@ export default function MainPage() {
                   {BoxOffice?.dailyBoxOfficeList && BoxOffice?.dailyBoxOfficeList.map((product, index) => {
                     return (
                       <>
-                        <Lank key={`${product.rnum}_${index}`} rank={product.rank}
+                        <Lank key={`${index}_${product.rnum}`} rank={product.rank}
                           movieNm={product.movieNm} movieCd={product.movieCd} />
                       </>
                     )

@@ -19,10 +19,3 @@ export const videoSearch = async () => {
 
   return reponse.data
 }
-
-// export const MoviesList = async () => {
-
-//   const MoviesListURL = 'https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=f5eef3421c602c6cb7ea224104795888&itemPerPage=100&openStartDt=2023'
-//   const reponse = await axios.get(MoviesListURL)
-//   return reponse.data.movieListResult
-// }
