@@ -108,7 +108,6 @@ export default function PageHeader() {
         <>
             <TitleCon>
               <FaList size="32" onClick={ClickLogo} style={{  cursor: 'pointer'}}/>
-              {/* <GiPopcorn size="32" onClick={ClickLogo} style={{  cursor: 'pointer'}} /> */}
               <Link to="/" style={{ textDecoration: "none"}}>
                 <Title>The moive</Title>
               </Link>
