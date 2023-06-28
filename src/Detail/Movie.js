@@ -24,11 +24,10 @@ export default function Movie(props) {
   }, [])
 
   const lastURL = MoviesPoster?.substr(0, 60)
-
   
   return (
     <>
-      <Link to={`/movies/${props.movieCd}`} style={{ textDecoration: "none"}} state={{ code : props }}>
+      <Link to={`/movies/${props.movieCd}`}  style={{ textDecoration: "none"}} state={{ code : props }}>
         <MovieCon>
           <MovieImg src={lastURL && lastURL ? lastURL : 'https://placehold.co/174x249?text=No Image'} />
           <MovieTitle>

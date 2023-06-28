@@ -13,6 +13,8 @@ export default function MovieDetailPage() {
   const MovieCode = location.state.code.movieCd
   const MovieName= location.state.code.movieNm
 
+  console.log(location)
+
   const MoviesPosters = async () => {
     const MoviesListURL = `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=3842RN287KYH50333158&title=${MovieName}`
     const reponse = await axios.get(MoviesListURL)
@@ -49,8 +51,6 @@ export default function MovieDetailPage() {
   const year = MovieopenDt.substr(0, 4)
   const month = MovieopenDt.substr(4, 2)
   const day = MovieopenDt.substr(6, 2)
-
-  console.log(CODE.actors)
 
   return (
     <>
@@ -256,7 +256,7 @@ export default function MovieDetailPage() {
 
   )
 }
-// {product.peopleNm}_{product.cast}
+
 const Container = styled.section`
   width: 1200px;
   margin: 130px auto;

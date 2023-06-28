@@ -8,6 +8,7 @@ import { BsTrashFill } from 'react-icons/bs'
 export default function Postspage() {
   const inputRef = useRef(null)
   const navigate = useNavigate()
+
   const location = useLocation()
   const titlement = location.state.ment.title
   const textment = location.state.ment.text
@@ -45,30 +46,24 @@ export default function Postspage() {
   // eslint-disable-next-line array-callback-return
   usernameList && usernameList.map((product, _) => {
     if(product.email === naaame) {
-      // setWriter(product.name)
       writer.push(product.name)
     }
   })
 
-  // 현재 접속자 - 댓글남기는사람
-  // console.log(writer[0])
-
   const [comment, setComent] = useState('')
   const [commentList, setComentList] = useState([])
-  // const [commenteditList, setComenteditList] = useState([])
 
   const ThiscommentList = []  // 현재 글의 댓글들(댓글 id 포함)
-  // const ThiscomentUserList = []
 
   const ComentClick = async () => {
     inputRef.current.value = ""
     const docRef = await addDoc(collection(fireStore, "Comments"), {
       id : `${id}`,
-      commentuser : writer[0],
+      commentuser : writer[0], //현재 로그인한 사용자
       comment : comment,
       timestamp: new Date(),
     })
-    console.log(comment)
+    console.log(docRef)
     window.location.reload()
   }
 
@@ -83,7 +78,6 @@ export default function Postspage() {
         datas : boards,
       }
       setComentList(editdeletelist)
-      // setComenteditList(editdeletelist)
     }
     select()
   }, [])
@@ -91,26 +85,20 @@ export default function Postspage() {
   // eslint-disable-next-line array-callback-return
   commentList.datas && commentList.datas.map((product, index) => {
     if(product.id === `${id}`) {
-      // setWriter(product.name)
       const commentobj = {
         commenttext: product.comment,
         commentuser: product.commentuser,
         commentid: commentList.commentid[index],
       }
       ThiscommentList.push(commentobj)
-      // console.log(product)
     }
   })
-
-  // console.log(location.state.ment)
 
   const DeleteCommentbtnclick = (props) => {
     deleteDoc(doc(fireStore, "Comments", `${props.commentid}`))
     alert('삭제 되었습니다')
     window.location.reload()
-    // console.log(props.commentid)
   }
-  // console.log(ThiscommentList)
 
   const [eidtcomment, seteditComment] = useState('')
   const [eidtcommentid, seteditCommentID] = useState('')
@@ -131,8 +119,6 @@ export default function Postspage() {
     window.location.reload()
     console.log(props.commentid)
   }
-
-  console.log(editstate)
 
   return (
     <Container>

@@ -27,8 +27,6 @@ export default function WritingPage() {
   }
 
   const [username, setUsername] = useState([])
-  // const [writer, setWriter] = useState("")
-  // const writer = ''
 
   useEffect (() => {
     async function select() {
@@ -46,7 +44,6 @@ export default function WritingPage() {
   // eslint-disable-next-line array-callback-return
   username && username.map((product, _) => {
     if(product.email === naaame) {
-      // setWriter(product.name)
       console.log(product.name)
       writer.push(product.name)
     }
@@ -58,6 +55,7 @@ export default function WritingPage() {
   const [text, setText] = useState("")
 
   const Uploadclick = async () => {
+    // eslint-disable-next-line no-unused-vars
     const docRef = await addDoc(collection(fireStore, "List"), {
       title : title,
       text : text,
@@ -70,10 +68,6 @@ export default function WritingPage() {
 
   return (
     <Container>
-      {/* <TitleCon>
-        <Titleinput type='text' placeholder='제목을 작성하세요' 
-          onChange={setTitle} />
-      </TitleCon> */}
       <DescCon>
         <Titleinput type='text' placeholder='제목을 작성하세요' 
           onChange={(e) => {
@@ -85,8 +79,6 @@ export default function WritingPage() {
           modules={modules}
           style={{ height: '250px'}}
         />
-        {/* 작성한 ㅓ 보여지는 거
-        <div dangerouslySetInnerHTML={{ __html :  text  }} /> */}
         <Link to='/critique'>
           <Finishbtn onClick={Uploadclick}>작성하기</Finishbtn>
         </Link>
@@ -114,7 +106,7 @@ const Titleinput = styled.input`
 `
 
 const DescCon = styled.div`
-  margin: auto 150px;
+  margin: auto 10%;
   position: relative;
 `
 

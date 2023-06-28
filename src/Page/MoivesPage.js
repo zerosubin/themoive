@@ -7,11 +7,9 @@ import { useInView } from "react-intersection-observer"
 import { useLocation } from "react-router-dom"
 import { Desktop, Tablet, Mobile } from "../Mediaquery"
 
-export default function MoivesPage(props) {
+export default function MoivesPage() {
   const location = useLocation()
   const word = location?.state?.code
-
-  console.log(props)
 
   const [ThemoviesLists, setThemoviesLists] = useState([])
   const [page, setPage] = useState(1)
@@ -33,7 +31,6 @@ export default function MoivesPage(props) {
 
   useEffect(() => {
     if (inView) {
-      // 스크롤 해야함!
       MoviesList()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -48,7 +45,6 @@ export default function MoivesPage(props) {
       newlist?.push(product)
     }
   })
-  console.log(newlist)
 
   return (
     <>
@@ -61,7 +57,7 @@ export default function MoivesPage(props) {
               {
                 newlist && newlist.map((product, index) => {
                   return (
-                    <Movie key={`${product.movieCd}_${index}`} movieNm={product.movieNm} movieCd={product.movieCd} />
+                    <Movie key={`${product.movieCd}_${index}`} movieNm={product.movieNm} movieNmEn={product.movieNmEn} movieCd={product.movieCd} />
                   )
                 })
               }

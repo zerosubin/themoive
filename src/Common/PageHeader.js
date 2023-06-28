@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { styled } from 'styled-components'
 import { GiPopcorn } from "react-icons/gi"
+import { FaList } from "react-icons/fa"
 import { FaUserAstronaut } from "react-icons/fa"
 import { Link } from "react-router-dom"
 
@@ -106,7 +107,8 @@ export default function PageHeader() {
         <Tablet>
         <>
             <TitleCon>
-              <GiPopcorn size="32" onClick={ClickLogo} />
+              <FaList size="32" onClick={ClickLogo} style={{  cursor: 'pointer'}}/>
+              {/* <GiPopcorn size="32" onClick={ClickLogo} style={{  cursor: 'pointer'}} /> */}
               <Link to="/" style={{ textDecoration: "none"}}>
                 <Title>The moive</Title>
               </Link>
@@ -147,7 +149,7 @@ export default function PageHeader() {
         <Mobile>
         <>
             <TitleCon>
-              <GiPopcorn size="32" onClick={ClickLogo} />
+              <FaList size="32" onClick={ClickLogo} style={{  cursor: 'pointer'}}/>
               <Link to="/" style={{ textDecoration: "none"}}>
                 <Title>The moive</Title>
               </Link>

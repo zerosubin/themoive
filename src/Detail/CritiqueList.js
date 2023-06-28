@@ -1,14 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { styled } from 'styled-components'
-import { Link, useNavigate } from "react-router-dom"
-import { fireStore } from "../Firebase"
-import { updateDoc, doc } from "firebase/firestore"
+import { useNavigate } from "react-router-dom"
 
 export default function CritiqueList(props) {
-  
-  // console.log(number)
-  // console.log(props.id)
-
   const navigate = useNavigate()
 
   const updateview = () => {
@@ -26,8 +20,6 @@ export default function CritiqueList(props) {
           e.preventDefault()
           updateview()
         }}>
-          {/* <Link to={`/critique/${props.title}`} style={{ textDecoration: "none", color: '#000'}}
-          state={{ ment : props }}> */}
             {props.title}
         </Tdment>
         <Tdcount>{props.view}</Tdcount>

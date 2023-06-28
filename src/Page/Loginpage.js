@@ -13,12 +13,12 @@ export default function Loginpage() {
 
   const login = async () => {
     try {
+      // eslint-disable-next-line no-unused-vars
       const user = await signInWithEmailAndPassword(
         authService,
         loginEmail,
         loginPassword
       )
-      console.log(user)
       localStorage.setItem("user", loginEmail)
       window.location.replace("/")
       alert('로그인에 성공하셨습니다!')
@@ -58,11 +58,11 @@ export default function Loginpage() {
   const GoogleSingup = () => {
     signInWithPopup(authService, provider)
     .then(async (data) => { 
+      // eslint-disable-next-line no-unused-vars
       const docRef = await addDoc(collection(fireStore, "Users"), {
         name : data.user.displayName,
         email : data.user.email,
       })
-      console.log(docRef)
       localStorage.setItem("user", data.user.email)
       window.location.assign("/")
       return alert('구글 소셜 회원가입에 성공하셨습니다!')
@@ -101,7 +101,6 @@ export default function Loginpage() {
           }}>로그인</LoginBtn>
       </Link>
       <FcGoogle size="34" onClick={Googlelogin}></FcGoogle>
-      {/* {googleuser ? googleuser.displayName : null} */}
       <Link to="/signup" style={{ textDecoration: "none"}}>
         <SingupBtn>회원가입</SingupBtn>
       </Link>
@@ -154,28 +153,14 @@ const LoginBtn = styled.button`
 
   background-color: #007542;
   color: #fff;
-
   cursor: pointer;
 `
-// const GoogleBtn = styled.button`
-//   padding: 12px 24px;
-
-//   border-radius: 12px;
-//   border: 0;
-
-//   background-color: #007542;
-//   color: #fff;
-
-//   cursor: pointer;
-// `
 const SingupBtn = styled.p`
   margin: 16px 0 8px 0;
   color: #000;
-
   cursor: pointer;
 `
 const GoogleSingupBtn = styled.span`
   color: #000;
-
   cursor: pointer;
 `

@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { styled } from 'styled-components'
 import { BoxYear, Boxmonth, Boxdate } from "../Date/Dateseting"
 import { BoxOfficeList, videoSearch } from "../Service/ProductAPI"
-import Lank from "../BoxList/Lank"
+import Lank from "../Detail/Lank"
 import { Desktop, Tablet, Mobile } from "../Mediaquery"
-
-//import { authService } from "../Firebase"
 
 export default function MainPage() {
   const [BoxOffice, setBoxOffice] = useState({})
@@ -25,8 +23,6 @@ export default function MainPage() {
     })()
   }, [])
 
-  // console.log(video)
-
   const codeList = []
 
   // eslint-disable-next-line array-callback-return
@@ -44,7 +40,7 @@ export default function MainPage() {
 
 
   return (
-    <><>
+    <>
       <Desktop>
         <>
           <Container>
@@ -53,13 +49,6 @@ export default function MainPage() {
                 <Title>일간 박스오피스</Title>
                 <Day>{`${BoxYear}-${Boxmonth}-${Boxdate}`}</Day>
                 <List>
-                  {/* {
-    Array.from({ length: 10 }).map((_, index) => {
-      return (
-        <Lank key={index}><MoiveTitle>영화제목</MoiveTitle></Lank>
-      )
-    })
-    } */}
                   {BoxOffice?.dailyBoxOfficeList && BoxOffice?.dailyBoxOfficeList.map((product, index) => {
                     return (
                       <>
@@ -97,18 +86,11 @@ export default function MainPage() {
                 <Title>일간 박스오피스</Title>
                 <Day>{`${BoxYear}-${Boxmonth}-${Boxdate}`}</Day>
                 <List>
-                  {/* {
-      Array.from({ length: 10 }).map((_, index) => {
-        return (
-          <Lank key={index}><MoiveTitle>영화제목</MoiveTitle></Lank>
-        )
-      })
-    } */}
                   {BoxOffice?.dailyBoxOfficeList && BoxOffice?.dailyBoxOfficeList.map((product, index) => {
                     return (
                       <>
                         <Lank key={`${index}_${product.rnum}`} rank={product.rank}
-                          movieNm={product.movieNm} movieCd={product.movieCd} />
+                          movieNm={product.movieNm} movieNmEn={product.movieNmEn} movieCd={product.movieCd} />
                       </>
                     )
                   })}
@@ -133,8 +115,7 @@ export default function MainPage() {
           </ContainerTablet>
         </>
       </Tablet>
-    </>
-    <Mobile>
+      <Mobile>
         <>
           <ContainerTablet>
             <BoxOfficeCon>
@@ -142,13 +123,6 @@ export default function MainPage() {
                 <Title>일간 박스오피스</Title>
                 <Day>{`${BoxYear}-${Boxmonth}-${Boxdate}`}</Day>
                 <List>
-                  {/* {
-                    Array.from({ length: 10 }).map((_, index) => {
-                      return (
-                        <Lank key={index}><MoiveTitle>영화제목</MoiveTitle></Lank>
-                      )
-                    })
-                  } */}
                   {BoxOffice?.dailyBoxOfficeList && BoxOffice?.dailyBoxOfficeList.map((product, index) => {
                     return (
                       <>
@@ -168,8 +142,7 @@ export default function MainPage() {
                     <Iframe width="350" height="280"
                       src={LinkScr}
                       title="YouTube video player"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    >
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share">
                     </Iframe>
                   </>
                 </YouCon>
@@ -179,7 +152,6 @@ export default function MainPage() {
         </>
       </Mobile>
     </>
-
   )
 }
 

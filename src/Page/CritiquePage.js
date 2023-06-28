@@ -1,18 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import CritiqueList from '../Detail/CritiqueList'
 
 import { fireStore } from "../Firebase"
-import { getDocs, collection, orderBy, query, limit, startAfter, endBefore } from "firebase/firestore"
-import { async } from '@firebase/util'
+import { getDocs, collection, orderBy, query, limit, startAfter } from "firebase/firestore"
 
 
 export default function CritiquePage() {
   const navigate = useNavigate()
+
   const [List, setList] = useState([])
-  const [username, setUsername] = useState([])
   const [pagenum, setpagenum] = useState() 
   const [nextpagenum, setNextpagenum] = useState() 
   
@@ -21,7 +20,7 @@ export default function CritiquePage() {
   useEffect (() => {
     async function select() {
       const board = collection(fireStore, "List")
-      const result = await getDocs(query(board, orderBy("timestamp", "desc"), limit(3)))
+      const result = await getDocs(query(board, orderBy("timestamp", "desc"), limit(5)))
       const boards = result.docs.map((doc) => doc.data())
       const id = result.docs.map((doc) => doc.id)
       const IDboards = {
@@ -30,9 +29,7 @@ export default function CritiquePage() {
       }
 
       setList(IDboards)
-      setUsername(boards)
       setNextpagenum(result)
-      console.log(result.docs)
       setpagenum(result)
     }
     select()
@@ -43,11 +40,8 @@ export default function CritiquePage() {
   }
 
   const prevpage = async () => {
-    // const lastVisible = pagenum.docs[pagenum.docs.length - 1]
-    // console.log(pagenum.docs)
-
     const nextboard = collection(fireStore, "List")
-    const nextresult = await getDocs(query(nextboard, orderBy("timestamp", "desc"), limit(3)))
+    const nextresult = await getDocs(query(nextboard, orderBy("timestamp", "desc"), limit(5)))
     
     const nextboards = pagenum.docs.map((doc) => doc.data())
     const nextid = pagenum.docs.map((doc) => doc.id)
@@ -56,7 +50,6 @@ export default function CritiquePage() {
       idnumber: nextid,
     }
     setList(IDboards)
-    setUsername(nextboards)
     setNextpagenum(nextresult)
   }
 
@@ -64,7 +57,7 @@ export default function CritiquePage() {
     const lastVisible = nextpagenum.docs[nextpagenum.docs.length - 1]
 
     const nextboard = collection(fireStore, "List")
-    const nextresult = await getDocs(query(nextboard, orderBy("timestamp", "desc"), startAfter(lastVisible), limit(3)))
+    const nextresult = await getDocs(query(nextboard, orderBy("timestamp", "desc"), startAfter(lastVisible), limit(5)))
     
     const nextboards = nextresult.docs.map((doc) => doc.data())
     const nextid = nextresult.docs.map((doc) => doc.id)
@@ -73,9 +66,7 @@ export default function CritiquePage() {
       idnumber: nextid,
     }
     setList(IDboards)
-    setUsername(nextboards)
     setNextpagenum(nextresult)
-    console.log(nextresult.docs)
   }
 
 
@@ -112,26 +103,25 @@ export default function CritiquePage() {
               }
           </tbody>
         </Table>
-        <button onClick={prevpage}>처음으로</button>
+        <Gobackbtn onClick={prevpage}>처음으로</Gobackbtn>
         {
-          (nextpagenum?.docs?.length < 3)
+          (nextpagenum?.docs?.length < 5)
           ?
           ''
           :
-          <button onClick={nextpage}>{`>`}</button>
+          <Nextbtn onClick={nextpage}>{`>`}</Nextbtn>
         }
-        {/* <button onClick={nextpage}>다음</button> */}
     </Container>
   )
 }
 
 const Container = styled.section`
-  margin: 150px auto;
+  margin: 130px auto;
   text-align: center; 
 `
 
 const Title = styled.h2`
-  width: 80%;
+  width: 70%;
   margin: auto;
   padding: 24px;
 
@@ -142,16 +132,16 @@ const Writingbtn = styled.button`
   margin: 8px;
   padding: 12px;
   position: absolute;
-  right: 174px;
-  top: 165px;
+  right: 16%;
+  top: 20%;
   border-radius: 12px;
   border: 0;
-  background-color: #1483ff;
+  background-color: #000;
   color: #fff;
   cursor: pointer;
 `
 const Table = styled.table`
-  width: 80%;
+  width: 70%;
   height: 1cm;
   margin: 24px auto;
 `
@@ -168,9 +158,27 @@ const Tdnumber = styled.td`
   border-bottom: 1px solid black;
   padding: 12px;
 `
-// const Tdment = styled.td`
-//   padding: 16px;
-// `
-// const Tdcount = styled.td`
-//   padding: 16px;
-// `
+
+const Gobackbtn = styled.button`
+  padding: 8px;
+  margin: 4px;
+  border: 0;
+  background-color: #fff;
+  border-radius: 12px;
+  cursor: pointer;
+  &:hover {
+    background-color: #dcdcdc;
+  }
+`
+
+const Nextbtn = styled.button`
+  padding: 8px;
+  margin: 4px;
+  border: 0;
+  background-color: #fff;
+  border-radius: 12px;
+  cursor: pointer;
+  &:hover {
+    background-color: #dcdcdc;
+  }
+`

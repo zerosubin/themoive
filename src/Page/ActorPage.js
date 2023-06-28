@@ -62,7 +62,6 @@ export default function ActorPage() {
           </ImgCon>
           <DetailCon>
             <ActorName>{Name} ({actorname.peopleNmEn}) </ActorName>
-            {/* ({lastdosc.peopleNmEn}) */}
             <Title>직업</Title>
             <Dosc>
               <Ment>{actorname.repRoleNm}</Ment>
@@ -70,7 +69,6 @@ export default function ActorPage() {
 
             <Title>필모그래피</Title>
             <Dosc>
-              {/* <Ment>{actorname.filmoNames}</Ment> */}
               {
                 lastlist && lastlist.map((product, index) => {
                   return (
@@ -90,7 +88,6 @@ export default function ActorPage() {
           </ImgConTablet>
           <DetailCon>
             <ActorName>{Name} ({actorname.peopleNmEn}) </ActorName>
-            {/* ({lastdosc.peopleNmEn}) */}
             <Title>직업</Title>
             <Dosc>
               <Ment>{actorname.repRoleNm}</Ment>
@@ -98,7 +95,6 @@ export default function ActorPage() {
 
             <Title>필모그래피</Title>
             <Dosc>
-              {/* <Ment>{actorname.filmoNames}</Ment> */}
               {
                 lastlist && lastlist.map((product, index) => {
                   return (
@@ -118,7 +114,6 @@ export default function ActorPage() {
           </ImgConMobile>
           <DetailCon>
             <ActorName>{Name} ({actorname.peopleNmEn}) </ActorName>
-            {/* ({lastdosc.peopleNmEn}) */}
             <Title>직업</Title>
             <Dosc>
               <Ment>{actorname.repRoleNm}</Ment>
@@ -126,7 +121,6 @@ export default function ActorPage() {
 
             <Title>필모그래피</Title>
             <Dosc>
-              {/* <Ment>{actorname.filmoNames}</Ment> */}
               {
                 lastlist && lastlist.map((product, index) => {
                   return (

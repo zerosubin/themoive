@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { styled } from 'styled-components'
-// import { Link } from 'react-router-dom'
 
 import { authService, fireStore } from "../Firebase"
 import { createUserWithEmailAndPassword } from "firebase/auth"
@@ -14,9 +13,7 @@ export default function Signuppage() {
 
 
 
-  const User = async () => {
-    console.log(userPassword)
-    console.log(userPasswordCheck)    
+  const User = async () => {   
     if(userPassword !== userPasswordCheck) {
       return alert('비밀번호를 다시 확인해주세요')
     } else {
@@ -51,51 +48,42 @@ export default function Signuppage() {
           default:
             return alert("로그인에 실패 하였습니다.")
         }
-          // console.log(error.message)
-          // alert(error.message)
       }
     }
   }
 
-  // const CheckEmail = () => {
-  //   // const userDB = fireStore.collection("Users")
-  //   // console.log(userDB.id)
-  // }
-
-
   return (
     <>
-    <Container>
-      <Signup>회원가입</Signup>
-      <Nameinput type='text' placeholder='닉네임' required
-        onChange={(e) => {
-          setUserName(e.target.value)
-        }}
-      />
-      <Con>
-        <IDinput type='text' placeholder='이메일' required 
+      <Container>
+        <Signup>회원가입</Signup>
+        <Nameinput type='text' placeholder='닉네임' required
           onChange={(e) => {
-            setUserEmail(e.target.value)
+            setUserName(e.target.value)
           }}
         />
-        {/* <CheckBtn onClick={() => CheckEmail()}>중복검사</CheckBtn> */}
-      </Con>
-      <PWinput type='password' placeholder='비밀번호 (6자리 이상)' required
-        onChange={(e) => {
-          setUserPassword(e.target.value)
-        }}
-      />
-      <PWcheckinput type='password' placeholder='비밀번호 확인' required
-        onChange={(e) => {
-          setUserPasswordCheck(e.target.value)
-        }}
-      />
-      <SignupBtn 
-        onClick={(element) => {
-          element.preventDefault()
-          User()
-        }}>회원가입</SignupBtn>
-    </Container>
+        <Con>
+          <IDinput type='text' placeholder='이메일' required 
+            onChange={(e) => {
+              setUserEmail(e.target.value)
+            }}
+          />
+        </Con>
+        <PWinput type='password' placeholder='비밀번호 (6자리 이상)' required
+          onChange={(e) => {
+            setUserPassword(e.target.value)
+          }}
+        />
+        <PWcheckinput type='password' placeholder='비밀번호 확인' required
+          onChange={(e) => {
+            setUserPasswordCheck(e.target.value)
+          }}
+        />
+        <SignupBtn 
+          onClick={(element) => {
+            element.preventDefault()
+            User()
+          }}>회원가입</SignupBtn>
+      </Container>
     </>
   )
 }
@@ -137,17 +125,6 @@ const Nameinput = styled.input`
 
   outline: none;
 `
-
-// const CheckBtn =  styled.button`
-//   padding: 0 10px;
-//   border-radius: 12px;
-//   border: 0;
-
-//   background-color: #519cff;
-//   color: #fff;
-
-//   cursor: pointer;
-// `
 
 const PWinput = styled.input`
   padding: 10px;

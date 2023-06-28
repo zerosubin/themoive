@@ -3,8 +3,7 @@ import { styled } from 'styled-components'
 import { Link } from "react-router-dom"
 
 export default function Actor(props) {
-
-  console.log(props)
+  
   return (
     <Link to={`/${props.peopleNm}`} style={{ textDecoration: "none"}} state={{ code : props }}>
       <Actorname>

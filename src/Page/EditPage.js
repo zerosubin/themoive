@@ -27,9 +27,7 @@ export default function EditPage() {
   }
 
     const location = useLocation()
-    console.log(location.state.editor.state.ment)
     const product = location.state.editor.state.ment
-    console.log(product)
 
     const [eidtTitle, setTitle] = useState("")
     const [eidtText, setText] = useState("")
@@ -39,6 +37,7 @@ export default function EditPage() {
       setTitle(product.title)
       setText(product.text)
       setpostID(product.id)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const EidtClick = () => {
@@ -47,31 +46,12 @@ export default function EditPage() {
         title: eidtTitle,
         text: eidtText,
       })
-      console.log(eidtText)
       alert('수정 완료!')
       navigate(`/critique`)
     }
 
-
-    // const Uploadclick = async () => {
-    //   const docRef = await addDoc(collection(fireStore, "List"), {
-    //     title : title,
-    //     text : text,
-    //     view: 0,
-    //     timestamp: new Date(),
-    //     name: writer,
-    //   })
-    //   console.log(docRef)
-    //   alert('작성이 완료되었습니다!')
-    // }
-    console.log(eidtTitle)
-
   return (
     <Container>
-      {/* <TitleCon>
-        <Titleinput type='text' placeholder='제목을 작성하세요' 
-          onChange={setTitle} />
-      </TitleCon> */}
       <DescCon>
         <Titleinput type='text' placeholder='제목을 작성하세요'
           value={eidtTitle}
@@ -85,11 +65,6 @@ export default function EditPage() {
           style={{ height: '250px'}}
           value={eidtText}
         />
-        {/* 작성한 ㅓ 보여지는 거
-        <div dangerouslySetInnerHTML={{ __html :  text  }} /> */}
-        {/* <Link to='/critique' >
-          <Finishbtn onClick={EidtClick}>수정 완료</Finishbtn>
-        </Link> */}
         <Finishbtn onClick={(e) => {
           e.preventDefault()
           EidtClick()
