@@ -36,24 +36,24 @@ export default function Loginpage() {
 
   const provider = new GoogleAuthProvider() 
 
-  const Googlelogin = async () => {
-    signInWithPopup(authService, provider)
-      .then(async (data) => {
-        localStorage.setItem("user", data.user.email)
-        window.location.assign("/")
-        return alert('구글 소셜 로그인에 성공하셨습니다!')
-      })
-      .catch((error) => {
-        switch (error.code) {
-          case "auth/user-not-found" || "auth/wrong-password":
-            return alert("이메일 혹은 비밀번호가 일치하지 않습니다.")
-          case "auth/user-not-found":
-            return alert("해당하는 이메일이 없습니다. 회원가입을 진행해주세요.")
-          default:
-            return alert("로그인에 실패 하였습니다.")
-        }
-      })
-  }
+  // const Googlelogin = async () => {
+  //   signInWithPopup(authService, provider)
+  //     .then(async (data) => {
+  //       localStorage.setItem("user", data.user.email)
+  //       window.location.assign("/")
+  //       return alert('구글 소셜 로그인에 성공하셨습니다!')
+  //     })
+  //     .catch((error) => {
+  //       switch (error.code) {
+  //         case "auth/user-not-found" || "auth/wrong-password":
+  //           return alert("이메일 혹은 비밀번호가 일치하지 않습니다.")
+  //         case "auth/user-not-found":
+  //           return alert("해당하는 이메일이 없습니다. 회원가입을 진행해주세요.")
+  //         default:
+  //           return alert("로그인에 실패 하였습니다.")
+  //       }
+  //     })
+  // }
 
   const GoogleSingup = () => {
     signInWithPopup(authService, provider)
@@ -100,14 +100,14 @@ export default function Loginpage() {
           login()
           }}>로그인</LoginBtn>
       </Link>
-      <Googleloginbtn>
-        <FcGoogle size="22" onClick={Googlelogin} />
+      <Googleloginbtn onClick={GoogleSingup}>
+        <FcGoogle size="22" />
         <Googlespan>구글 로그인</Googlespan>
       </Googleloginbtn>
       <Link to="/signup" style={{ textDecoration: "none"}}>
         <SingupBtn>회원가입</SingupBtn>
       </Link>
-      <GoogleSingupBtn onClick={GoogleSingup}>구글 계정으로 회원가입</GoogleSingupBtn>
+      {/* <GoogleSingupBtn onClick={GoogleSingup}>구글 계정으로 회원가입</GoogleSingupBtn> */}
     </Container>
     </>
   )
@@ -163,10 +163,10 @@ const SingupBtn = styled.p`
   color: #000;
   cursor: pointer;
 `
-const GoogleSingupBtn = styled.span`
-  color: #000;
-  cursor: pointer;
-`
+// const GoogleSingupBtn = styled.span`
+//   color: #000;
+//   cursor: pointer;
+// `
 
 const Googleloginbtn = styled.div`
   display: flex;
