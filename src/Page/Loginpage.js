@@ -100,7 +100,10 @@ export default function Loginpage() {
           login()
           }}>로그인</LoginBtn>
       </Link>
-      <FcGoogle size="34" onClick={Googlelogin}></FcGoogle>
+      <Googleloginbtn>
+        <FcGoogle size="22" onClick={Googlelogin} />
+        <Googlespan>구글 로그인</Googlespan>
+      </Googleloginbtn>
       <Link to="/signup" style={{ textDecoration: "none"}}>
         <SingupBtn>회원가입</SingupBtn>
       </Link>
@@ -156,7 +159,7 @@ const LoginBtn = styled.button`
   cursor: pointer;
 `
 const SingupBtn = styled.p`
-  margin: 16px 0 8px 0;
+  margin: 8px 0;
   color: #000;
   cursor: pointer;
 `
@@ -164,3 +167,15 @@ const GoogleSingupBtn = styled.span`
   color: #000;
   cursor: pointer;
 `
+
+const Googleloginbtn = styled.div`
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  border: 1px solid #cfcfcf;
+  padding: 8px;
+  margin: 4px;
+  gap: 3px;
+  cursor: pointer;
+`
+const Googlespan = styled.span``
