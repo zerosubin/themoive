@@ -22,7 +22,7 @@ export default function PageHeader() {
   const Logoutbtn = async () => {
     try {
       await signOut(authService)
-      localStorage.removeItem("user")
+      sessionStorage.removeItem("user")
       alert('로그아웃 하셨습니다')
       window.location.assign("/")
     } catch (err) {
@@ -30,7 +30,7 @@ export default function PageHeader() {
     }
   }
 
-  const naaame = localStorage.getItem("user")
+  const naaame = sessionStorage.getItem("user")
   
   const SearchBtnClick = () => {
     inputRef.current.value = ""

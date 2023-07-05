@@ -16,7 +16,7 @@ export default function Postspage() {
   const username = location.state.ment.name
   const newview = location.state.views
 
-  const naaame = localStorage.getItem("user")
+  const naaame = sessionStorage.getItem("user")
 
   const updateRef = doc(fireStore, "List", `${id}`)
   updateDoc(updateRef, {

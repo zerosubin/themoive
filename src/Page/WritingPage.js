@@ -38,7 +38,7 @@ export default function WritingPage() {
     select()
   }, [])
 
-  const naaame = localStorage.getItem("user")
+  const naaame = sessionStorage.getItem("user")
   const writer = []
 
   // eslint-disable-next-line array-callback-return

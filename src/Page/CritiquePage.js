@@ -15,7 +15,7 @@ export default function CritiquePage() {
   const [pagenum, setpagenum] = useState() 
   const [nextpagenum, setNextpagenum] = useState() 
   
-  const naaame = localStorage.getItem("user")
+  const naaame = sessionStorage.getItem("user")
 
   useEffect (() => {
     async function select() {
