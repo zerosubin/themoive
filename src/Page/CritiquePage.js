@@ -72,6 +72,7 @@ export default function CritiquePage() {
 
   return (
     <Container>
+      <Box>
         <Title>방구석 평론회</Title>
         {
           (naaame !== null)
@@ -85,6 +86,7 @@ export default function CritiquePage() {
             alert('로그인을 해주세요')}}
           >글 쓰기</Writingbtn>
         }
+      </Box>
         <Table>
           <thead>
             <Tr>
@@ -124,16 +126,16 @@ const Title = styled.h2`
   width: 70%;
   margin: auto;
   padding: 24px;
-
-  border-bottom: 1px dashed #cfcfcf;
 `
-
+const Box = styled.div`
+  display: flex;
+  width: 66%;
+  margin: 0 auto;
+  align-items: center;
+`
 const Writingbtn = styled.button`
   margin: 8px;
   padding: 12px;
-  position: absolute;
-  right: 16%;
-  top: 20%;
   border-radius: 12px;
   border: 0;
   background-color: #000;
@@ -141,7 +143,7 @@ const Writingbtn = styled.button`
   cursor: pointer;
 `
 const Table = styled.table`
-  width: 70%;
+  width: 60%;
   height: 1cm;
   margin: 24px auto;
 `
@@ -149,7 +151,7 @@ const Table = styled.table`
 const Tr = styled.tr`
 `
 const Tdtitle = styled.td`
-  width: 70%;
+  width: 88%;
   border-bottom: 1px solid black;
   padding: 12px;
 `
