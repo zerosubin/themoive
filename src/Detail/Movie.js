@@ -3,7 +3,6 @@ import axios from "axios"
 import { Link } from "react-router-dom"
 import { styled } from 'styled-components'
 
-
 export default function Movie(props) {
   const [MoviesPoster, setMoviesPoster] = useState("")
 

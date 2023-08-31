@@ -52,7 +52,7 @@ export default function MainPage() {
                   {BoxOffice?.dailyBoxOfficeList && BoxOffice?.dailyBoxOfficeList.map((product, index) => {
                     return (
                       <>
-                        <Lank key={`${product.rnum}_${index}`} rank={product.rank}
+                        <Lank key={index} rank={product.rank}
                           movieNm={product.movieNm} movieCd={product.movieCd} />
                       </>
                     )
@@ -176,6 +176,7 @@ const ContainerTablet = styled.section`
 `
 
 const BoxOfficeCon = styled.div`
+  width: 100%;
 `
 
 const Box = styled.div`

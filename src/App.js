@@ -1,16 +1,16 @@
 import { BrowserRouter } from "react-router-dom"
 import PageHeader from "./Common/PageHeader"
 import PageNavigator from "./PageNavigator"
-
-// import { fireStore } from "./Firebase"
+import { RecoilRoot } from 'recoil'
 
 function App() {
 
   return (
     <BrowserRouter>
-      <PageHeader />
-      <PageNavigator />
-      {/* <div className="App">{fireStore._databaseId.projectId}</div> */}
+      <RecoilRoot>
+        <PageHeader />
+        <PageNavigator />
+      </RecoilRoot>
     </BrowserRouter>
   )
 }

@@ -18,17 +18,17 @@ export default function Signuppage() {
       return alert('비밀번호를 다시 확인해주세요')
     } else {
       try {
+        // eslint-disable-next-line no-unused-vars
         const user = await createUserWithEmailAndPassword(
             authService,
             userEmail,
             userPassword
         )
+        // eslint-disable-next-line no-unused-vars
         const docRef = await addDoc(collection(fireStore, "Users"), {
           name : userName,
           email : userEmail,
         })
-        console.log(user)
-        console.log(docRef)
         window.location.assign("/login")
         return alert('회원가입에 성공하셨습니다. 로그인을 진행해주세요!')
       } catch (error) {

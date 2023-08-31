@@ -44,12 +44,9 @@ export default function WritingPage() {
   // eslint-disable-next-line array-callback-return
   username && username.map((product, _) => {
     if(product.email === naaame) {
-      console.log(product.name)
       writer.push(product.name)
     }
   })
-
-  console.log(writer)
 
   const [title, setTitle] = useState("")
   const [text, setText] = useState("")

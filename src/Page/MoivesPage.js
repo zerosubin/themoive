@@ -4,7 +4,7 @@ import Movie from "../Detail/Movie"
 import axios from "axios"
 import { CgSearchLoading } from "react-icons/cg"
 import { useInView } from "react-intersection-observer"
-import { useLocation } from "react-router-dom"
+import { useLocation, Link } from "react-router-dom"
 import { Desktop, Tablet, Mobile } from "../Mediaquery"
 
 export default function MoivesPage() {
@@ -20,13 +20,22 @@ export default function MoivesPage() {
     axios
       .get(`https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=f5eef3421c602c6cb7ea224104795888&curPage=${page}&itemPerPage=100&openStartDt=${word && word ? '' : '2023'}&movieNm=${word && word ? word : ''}`)
       .then((res) => {
-        console.log(res?.data?.movieListResult?.movieList)
-        console.log(page)
         const next = res?.data?.movieListResult?.movieList
         setThemoviesLists([...ThemoviesLists, ...next])
         setPage((page) => page + 1)
       })
       .catch((err) => {console.log(err)})
+  }
+
+  const Reset = () => {
+    axios
+    .get(`https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=f5eef3421c602c6cb7ea224104795888&curPage=${page}&itemPerPage=100&openStartDt=2023`)
+    .then((res) => {
+      const next = res?.data?.movieListResult?.movieList
+      setThemoviesLists([...ThemoviesLists, ...next])
+      setPage((page) => page + 1)
+    })
+    .catch((err) => {console.log(err)})
   }
 
   useEffect(() => {
@@ -41,7 +50,7 @@ export default function MoivesPage() {
   // eslint-disable-next-line array-callback-return
   ThemoviesLists && ThemoviesLists?.map((product, _$) => {
     const genreAlt = product?.genreAlt
-    if(!genreAlt.includes('성인물(에로)')) {
+    if(!genreAlt.includes('성인물(에로)') && !genreAlt.includes('멜로/로맨스')) {
       newlist?.push(product)
     }
   })
@@ -51,8 +60,22 @@ export default function MoivesPage() {
       <Desktop>
         <>
           <Container>
-            <Title>the movies</Title>
-            { word ? <Searchment>'{word}'의 검색 결과</Searchment> : ''}
+            { 
+              word 
+              ?
+              <>
+                <PrevBox>
+                  <Link to='/movies'>
+                    <PrevMent onClick={() => {
+                        Reset()
+                      }}>전체 목록 확인하기</PrevMent>
+                  </Link>
+                </PrevBox>
+                <Searchment>'{word}'의 검색 결과</Searchment>
+              </>
+              :
+              <Title>the movies</Title>
+            }
             <MoiveList>
               {
                 newlist && newlist.map((product, index) => {
@@ -69,8 +92,22 @@ export default function MoivesPage() {
       <Tablet>
         <>
           <Container>
-            <Title>the movies</Title>
-            {word ? <Searchment>'{word}'의 검색 결과</Searchment> : ''}
+            { 
+              word 
+              ?
+              <>
+                <PrevBox>
+                  <Link to='/movies'>
+                    <PrevMent onClick={() => {
+                        Reset()
+                      }}>전체 목록 확인하기</PrevMent>
+                  </Link>
+                </PrevBox>
+                <Searchment>'{word}'의 검색 결과</Searchment>
+              </>
+              :
+              <Title>the movies</Title>
+            }
             <MoiveListTablet>
               {newlist && newlist.map((product, index) => {
                 return (
@@ -85,8 +122,22 @@ export default function MoivesPage() {
       <Mobile>
         <>
           <Container>
-            <Title>the movies</Title>
-            {word ? <Searchment>'{word}'의 검색 결과</Searchment> : ''}
+            { 
+              word 
+              ?
+              <>
+                <PrevBox>
+                  <Link to='/movies'>
+                    <PrevMent onClick={() => {
+                        Reset()
+                      }}>전체 목록 확인하기</PrevMent>
+                  </Link>
+                </PrevBox>
+                <Searchment>'{word}'의 검색 결과</Searchment>
+              </>
+              :
+              <Title>the movies</Title>
+            }
             <MoiveListMobile>
               {newlist && newlist.map((product, index) => {
                 return (
@@ -116,7 +167,6 @@ const Title =  styled.h2`
   margin: 34px 24px 24px 24px;
   padding-bottom: 46px;
   text-align: center;
-  border-bottom: 1px dashed #cfcfcf;
 `
 const MoiveList =  styled.div`
   margin: 0 auto;
@@ -142,6 +192,16 @@ const MoiveListMobile =  styled.div`
   justify-items: center;
 `
 
+const PrevBox = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`
+
+const PrevMent = styled.span`
+  margin-right: 52px;
+  color: #6a6a6a;
+  cursor: pointer;
+`
 
 const NextCon =  styled.button`
   display: flex;

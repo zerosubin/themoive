@@ -11,6 +11,7 @@ import ActorPage from './Page/ActorPage.js'
 import WritingPage from './Page/WritingPage.js'
 import Postspage from './Page/Postspage.js'
 import EditPage from './Page/EditPage.js'
+import MovielikePage from './Page/MovielikePage.js'
 
 export default function PageNavigator() {
   return (
@@ -26,6 +27,7 @@ export default function PageNavigator() {
         <Route path="/movies" element={<MoivesPage />}></Route>
         <Route path="/movies/*" element={<MovieDetailPage />}></Route>
         <Route path="/*" element={<ActorPage />}></Route>
+        <Route path="/movielike" element={<MovielikePage />}></Route>
       </Routes>
     </>
   )

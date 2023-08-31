@@ -5,15 +5,18 @@ import { useLocation } from "react-router-dom"
 import Actor from '../Detail/Actor'
 import { Desktop, Tablet, Mobile } from "../Mediaquery"
 
+import { fireStore } from "../Firebase"
+import { addDoc, collection, doc, getDocs, updateDoc, deleteDoc, query } from "firebase/firestore"
+
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"
+
 export default function MovieDetailPage() {
   const [MoviesPoster, setMoviesPoster] = useState("")
   const [CODE, setCODE] = useState("")
 
   const location = useLocation()
   const MovieCode = location.state.code.movieCd
-  const MovieName= location.state.code.movieNm
-
-  console.log(location)
+  const MovieName = location.state.code.movieNm
 
   const MoviesPosters = async () => {
     const MoviesListURL = `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=3842RN287KYH50333158&title=${MovieName}`
@@ -51,6 +54,81 @@ export default function MovieDetailPage() {
   const year = MovieopenDt.substr(0, 4)
   const month = MovieopenDt.substr(4, 2)
   const day = MovieopenDt.substr(6, 2)
+
+
+  const naaame = sessionStorage.getItem("user")
+  const [docId, setDocid] = useState('')
+  // 좋아요 등록
+  const movielike = async () => {
+    // eslint-disable-next-line no-unused-vars
+    const docRef = await addDoc(collection(fireStore, "Movies"), {
+      movieNm : MovieName,
+      image : lastURL,
+      name : naaame,
+      movieCd : MovieCode,
+      id : docId,
+    })
+    setDocid(docRef.id)
+    setIslike(true)
+
+  }
+
+  useEffect(() => {
+    if(docId !== '') {
+      const updateRef = doc(fireStore, "Movies", `${docId}`)
+      updateDoc(updateRef, {
+        id: docId,
+      })
+    }
+  }, [docId])
+
+
+  // 좋아요 목록
+  const [allLikeList, setAllLikelist] = useState([])
+
+  useEffect (() => {
+    async function select() {
+      const board = collection(fireStore, "Movies")
+      const result = await getDocs(query(board))
+      const boards = result.docs.map((doc) => doc.data())
+      setAllLikelist(boards)
+    }
+    select()
+  }, [])
+
+  // 해당 유저의 좋아요 목록
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const movielist = []
+  // eslint-disable-next-line array-callback-return
+  allLikeList && allLikeList.map((product, _) => {
+    if(product.name === naaame) {
+      movielist.push(product)
+    }
+  })
+
+  const [isLike, setIslike] = useState(false)
+
+  useEffect(() => {
+    if(movielist) {
+      // 좋아요 목록에 있는지 여부 확인
+      // eslint-disable-next-line array-callback-return
+      movielist && movielist.map((product, index) => {
+        if(product.movieCd === MovieCode) {
+          setIslike(true)
+        }
+      })
+    }
+  }, [MovieCode, movielist])
+
+  // 좋아요 삭제
+  const moviedelete = () => {
+    setIslike(false)
+    movielist && movielist.map(async (product, index) => {
+      if(product.movieCd === MovieCode)  {
+        deleteDoc(doc(fireStore, "Movies", `${product.id}`))
+      }
+    })
+  }
 
   return (
     <>
@@ -118,6 +196,15 @@ export default function MovieDetailPage() {
               } 
             </Actors>
           </MovieDosc>
+          <HeartCon>
+            {
+              isLike
+              ?
+              <AiFillHeart size={36} style={{ color: "red" }} onClick={moviedelete}/>
+              :
+              <AiOutlineHeart size={36} style={{ color: "red" }} onClick={movielike} />
+            }
+          </HeartCon>
         </Container>
       </Desktop>
       <Tablet>
@@ -262,7 +349,7 @@ const Container = styled.section`
   margin: 130px auto;
 
   display: grid;
-  grid-template-columns: 0.5fr 1fr;
+  grid-template-columns: 0.5fr 1fr 0.1fr;
 
   border-radius: 24px;
 `
@@ -282,6 +369,11 @@ const ContainerMobile = styled.section`
   grid-template-rows: 0.1fr 0.2fr;
 
   border-radius: 24px;
+`
+
+const HeartCon = styled.div`
+  padding: 28px;
+  cursor: pointer;
 `
 
 const Imgdiv = styled.div`

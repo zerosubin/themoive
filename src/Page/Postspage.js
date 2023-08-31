@@ -57,13 +57,13 @@ export default function Postspage() {
 
   const ComentClick = async () => {
     inputRef.current.value = ""
+    // eslint-disable-next-line no-unused-vars
     const docRef = await addDoc(collection(fireStore, "Comments"), {
       id : `${id}`,
       commentuser : writer[0], //현재 로그인한 사용자
       comment : comment,
       timestamp: new Date(),
     })
-    console.log(docRef)
     window.location.reload()
   }
 
@@ -106,7 +106,6 @@ export default function Postspage() {
 
   const EidtCommentClick = (props) => {
     seteditCommentID(props.commentid)
-    console.log(props.commentid)
   }
 
   const Editfinishbtn = (props) => {
@@ -117,7 +116,6 @@ export default function Postspage() {
     seteditstate(false)
     alert('수정 되었습니다')
     window.location.reload()
-    console.log(props.commentid)
   }
 
   return (
@@ -165,7 +163,6 @@ export default function Postspage() {
                         <CommenteditInput type='text'
                         onChange={(e) => {
                           seteditComment(e.target.value)
-                          console.log(e.target.value)
                         }} 
                         onKeyDown={(e) => (e.key === 'Enter' ? Editfinishbtn(product) : null)} />
                         <CommenteidtfinishBtn onClick={() => {
@@ -189,7 +186,6 @@ export default function Postspage() {
                           onClick={(e) => {
                             e.preventDefault()
                             DeleteCommentbtnclick(product)
-                            //console.log(product.commentid)
                           }}
                         />
                       </DeleteCommentbtn>
@@ -205,8 +201,6 @@ export default function Postspage() {
           :
           <p style={{ color : '#cfcfcf'}}>댓글을 달아보세요!</p>
         }
-        {/* <ComentUser>닉네임</ComentUser>
-        <ComentText>댓글내용</ComentText> */}
       </CommentCON>
       <InputCon>
         <CommentInput type='text' placeholder='댓글을 입력하세요'

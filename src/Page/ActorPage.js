@@ -46,8 +46,18 @@ export default function ActorPage() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  
+  console.log(image)
   console.log(image.image_url)
-  const ImageURL = image.image_url
+
+  let ImageURL = 'https://placehold.co/174x249?text=No Image'
+
+  if(image.collection === 'cafe') {
+    ImageURL = image.thumbnail_url
+  } else {
+    ImageURL = image.image_url
+  }
+  
   console.log(ImageURL)
 
   const list = String(actorname.filmoNames)

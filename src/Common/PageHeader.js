@@ -16,8 +16,8 @@ export default function PageHeader() {
   const inputRef = useRef(null)
   const [Popup, setPopup] = useState(false)
 
+  // eslint-disable-next-line no-unused-vars
   const user = authService.currentUser
-  console.log(user)
 
   const Logoutbtn = async () => {
     try {
@@ -63,9 +63,10 @@ export default function PageHeader() {
                 </Link>
                 <Link to="/movies" style={{ textDecoration: "none"}}>
                   <Li>
-                    <Ment onClick={() => {
+                    {/* <Ment onClick={() => {
                       window.location.replace('/movies')
-                    }}>the moives</Ment>
+                    }}>the moives</Ment> */}
+                    <Ment>the moives</Ment>
                   </Li>
                 </Link>
               </UL>
@@ -74,7 +75,6 @@ export default function PageHeader() {
               <Input type="text" placeholder='영화 제목을 검색하세요!'
                   onChange={(e) => {
                     setSearch(e.target.value)
-                    console.log(search)
                   }}
                   ref={inputRef}
               />
@@ -87,13 +87,19 @@ export default function PageHeader() {
                 (naaame !== null)
                 ? 
                 <>
+                  <Link to='/movielike' style={{ textDecoration: "none", color: "black"}}>
+                    <Movielikement>나의 좋아요 목록</Movielikement>
+                  </Link>
                   <Logouthover>
-                    <FaUserAstronaut size="32"/>
-                    <Logout onClick={(element) => {
+                    {/* <FaUserAstronaut size="32" onClick={(element) => {
+                      element.preventDefault()
+                      Logoutbtn()
+                    }}/> */}
+                    <p onClick={(element) => {
                       element.preventDefault()
                       Logoutbtn()
                     }}
-                    >로그아웃</Logout>
+                    >로그아웃</p>
                   </Logouthover>
                 </>
                 : 
@@ -130,11 +136,11 @@ export default function PageHeader() {
                 <>
                   <Logouthover>
                     <FaUserAstronaut size="32"/>
-                    <Logout onClick={(element) => {
+                    <p onClick={(element) => {
                       element.preventDefault()
                       Logoutbtn()
                     }}
-                    >로그아웃</Logout>
+                    >로그아웃</p>
                   </Logouthover>
                 </>
                 : 
@@ -202,9 +208,10 @@ export default function PageHeader() {
                 </Link>
                 <Link to="/movies" style={{ textDecoration: "none"}}>
                   <Li onClick={ClickLogo}>
-                    <Ment onClick={() => {
+                    {/* <Ment onClick={() => {
                       window.location.replace('/movies')
-                    }}>the moives</Ment>
+                    }}>the moives</Ment> */}
+                    <Ment>the moives</Ment>
                   </Li>
                 </Link>
               </UL>
@@ -285,11 +292,14 @@ const Logout = styled.div`
   border-radius: 15px;
 
   text-align: center;
-  visibility: hidden;
 `
 const Logouthover = styled.div`
   cursor: pointer;
   position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
 
   &:hover {
     color: #180ed0;
@@ -329,7 +339,13 @@ const LoginBtn = styled.button`
 
   cursor: pointer;
 `
-
+const Movielikement = styled.p`
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 12px;
+  color: #000;
+  background-color: #fff;
+`
 const PopupCon = styled.div`
   border: 1px dashed black;
   background-color: #fff;
