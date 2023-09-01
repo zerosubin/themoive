@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react'
 import { styled } from 'styled-components'
 import { GiPopcorn } from "react-icons/gi"
 import { FaList } from "react-icons/fa"
-import { FaUserAstronaut } from "react-icons/fa"
 import { Link } from "react-router-dom"
 
 import { signOut } from 'firebase/auth'
@@ -63,9 +62,6 @@ export default function PageHeader() {
                 </Link>
                 <Link to="/movies" style={{ textDecoration: "none"}}>
                   <Li>
-                    {/* <Ment onClick={() => {
-                      window.location.replace('/movies')
-                    }}>the moives</Ment> */}
                     <Ment>the moives</Ment>
                   </Li>
                 </Link>
@@ -91,10 +87,6 @@ export default function PageHeader() {
                     <Movielikement>나의 좋아요 목록</Movielikement>
                   </Link>
                   <Logouthover>
-                    {/* <FaUserAstronaut size="32" onClick={(element) => {
-                      element.preventDefault()
-                      Logoutbtn()
-                    }}/> */}
                     <p onClick={(element) => {
                       element.preventDefault()
                       Logoutbtn()
@@ -134,8 +126,10 @@ export default function PageHeader() {
                 (naaame !== null)
                 ? 
                 <>
+                  <Link to='/movielike' style={{ textDecoration: "none", color: "black"}}>
+                    <Movielikement>나의 좋아요 목록</Movielikement>
+                  </Link>
                   <Logouthover>
-                    <FaUserAstronaut size="32"/>
                     <p onClick={(element) => {
                       element.preventDefault()
                       Logoutbtn()
@@ -152,7 +146,7 @@ export default function PageHeader() {
           </>
         </Tablet>
         <Mobile>
-        <>
+          <>
             <TitleCon>
               <FaList size="32" onClick={ClickLogo} style={{  cursor: 'pointer'}}/>
               <Link to="/" style={{ textDecoration: "none"}}>
@@ -164,13 +158,15 @@ export default function PageHeader() {
                 (naaame !== null)
                 ? 
                 <>
+                  <Link to='/movielike' style={{ textDecoration: "none", color: "black"}}>
+                    <Movielikement>나의 좋아요 목록</Movielikement>
+                  </Link>
                   <Logouthover>
-                    <FaUserAstronaut size="32"/>
-                    <Logout onClick={(element) => {
+                    <p onClick={(element) => {
                       element.preventDefault()
                       Logoutbtn()
                     }}
-                    >로그아웃</Logout>
+                    >로그아웃</p>
                   </Logouthover>
                 </>
                 : 
@@ -208,9 +204,6 @@ export default function PageHeader() {
                 </Link>
                 <Link to="/movies" style={{ textDecoration: "none"}}>
                   <Li onClick={ClickLogo}>
-                    {/* <Ment onClick={() => {
-                      window.location.replace('/movies')
-                    }}>the moives</Ment> */}
                     <Ment>the moives</Ment>
                   </Li>
                 </Link>
@@ -236,7 +229,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 66px;
+  margin: 0 4%;
 `
 
 const TitleCon = styled.div`

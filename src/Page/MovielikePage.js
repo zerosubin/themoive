@@ -1,6 +1,7 @@
 import React, { useState ,useEffect } from 'react'
 import { styled } from 'styled-components'
 import { Link } from 'react-router-dom'
+import { Desktop, Tablet, Mobile } from "../Mediaquery"
 
 import { fireStore } from "../Firebase"
 import { getDocs,deleteDoc, doc, collection, query } from "firebase/firestore"
@@ -46,39 +47,114 @@ export default function MovielikePage() {
 
 
   return (
-    <Container>
-      <Title>나의 좋아요 목록</Title>
-      {
-        likelist.length > 0
-        ?
-        <Smtent>좋아하는 영화들이 당신을 기다리고 있어요! 얼른 시청해보세요!</Smtent>
-        :
-        <Smtent>좋아하는 영화가 있나요? 영화 상세 페이지에서 등록해보세요!</Smtent>
-      }
-      <ListBox>
-        {
-          likelist && likelist.map((product, index) => {
-            const url = product.image
-            return (
-              <>
-                <Box key={index}>
-                  <Link to={`/movies/${product.movieCd}`}  style={{ textDecoration: "none", color: 'black', width: '100%'}} state={{ code : product }}>
-                    <Box>
-                      <ImgBox>
-                        <Img src={url ? url : 'https://placehold.co/213x337?text=No Image'} />
-                      </ImgBox>
-                      <Bigtitle>{product.movieNm}</Bigtitle>
+    <>
+      <Desktop>
+        <Container>
+          <Title>나의 좋아요 목록</Title>
+          {
+            likelist.length > 0
+            ?
+            <Smtent>좋아하는 영화들이 당신을 기다리고 있어요! 얼른 시청해보세요!</Smtent>
+            :
+            <Smtent>좋아하는 영화가 있나요? 영화 상세 페이지에서 등록해보세요!</Smtent>
+          }
+          <ListBox>
+            {
+              likelist && likelist.map((product, index) => {
+                const url = product.image
+                return (
+                  <>
+                    <Box key={index}>
+                      <Link to={`/movies/${product.movieCd}`}  style={{ textDecoration: "none", color: 'black', width: '100%'}} state={{ code : product }}>
+                        <Box>
+                          <ImgBox>
+                            <Img src={url ? url : 'https://placehold.co/213x337?text=No Image'} />
+                          </ImgBox>
+                          <Bigtitle>{product.movieNm}</Bigtitle>
+                        </Box>
+                      </Link>
+                      <Delete onClick={() => {
+                        moviedelete(product.movieNm)}}>x</Delete>
                     </Box>
-                  </Link>
-                  <Delete onClick={() => {
-                    moviedelete(product.movieNm)}}>x</Delete>
-                </Box>
-              </>
-            )
-          })
-        }
-      </ListBox>
-    </Container>
+                  </>
+                )
+              })
+            }
+          </ListBox>
+        </Container>
+      </Desktop>
+      <Tablet>
+        <Container>
+          <Title>나의 좋아요 목록</Title>
+          {
+            likelist.length > 0
+            ?
+            <Smtent>좋아하는 영화들이 당신을 기다리고 있어요! 얼른 시청해보세요!</Smtent>
+            :
+            <Smtent>좋아하는 영화가 있나요? 영화 상세 페이지에서 등록해보세요!</Smtent>
+          }
+          <ListBox>
+            {
+              likelist && likelist.map((product, index) => {
+                const url = product.image
+                return (
+                  <>
+                    <Box key={index}>
+                      <Link to={`/movies/${product.movieCd}`}  style={{ textDecoration: "none", color: 'black', width: '100%'}} state={{ code : product }}>
+                        <Box>
+                          <ImgBox>
+                            <Img src={url ? url : 'https://placehold.co/213x337?text=No Image'} />
+                          </ImgBox>
+                          <Bigtitle>{product.movieNm}</Bigtitle>
+                        </Box>
+                      </Link>
+                      <Delete onClick={() => {
+                        moviedelete(product.movieNm)}}>x</Delete>
+                    </Box>
+                  </>
+                )
+              })
+            }
+          </ListBox>
+        </Container>
+      </Tablet>
+      <Mobile>
+        <Container>
+          <Title>나의 좋아요 목록</Title>
+          {
+            likelist.length > 0
+            ?
+            <Smtent>좋아하는 영화들이 당신을 기다리고 있어요! 얼른 시청해보세요!</Smtent>
+            :
+            <Smtent>좋아하는 영화가 있나요? 영화 상세 페이지에서 등록해보세요!</Smtent>
+          }
+          <ListBox>
+            {
+              likelist && likelist.map((product, index) => {
+                const url = product.image
+                return (
+                  <>
+                    <Box key={index}>
+                      <Link to={`/movies/${product.movieCd}`}  style={{ textDecoration: "none", color: 'black', width: '100%'}} state={{ code : product }}>
+                        <Box>
+                          <ImgBox>
+                            <Img src={url ? url : 'https://placehold.co/213x337?text=No Image'} />
+                          </ImgBox>
+                          <Bigtitle>{product.movieNm}</Bigtitle>
+                        </Box>
+                      </Link>
+                      <Delete onClick={() => {
+                        moviedelete(product.movieNm)}}>x</Delete>
+                    </Box>
+                  </>
+                )
+              })
+            }
+          </ListBox>
+        </Container>
+      </Mobile>
+    </>
+
   )
 }
 

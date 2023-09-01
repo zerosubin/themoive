@@ -6,11 +6,11 @@ export const Desktop = ({children}) => {
 }
 
 export const Tablet = ({children}) => {
-  const isTablet = useMediaQuery({query: '(max-width: 1199px) and (min-width: 740px)'})
+  const isTablet = useMediaQuery({query: '(max-width: 1199px) and (min-width: 855px)'})
   return isTablet ? children : null
 }
 
 export const Mobile = ({children}) => {
-  const isMobile = useMediaQuery({query: '(max-width: 739px)'})
+  const isMobile = useMediaQuery({query: '(max-width: 854px)'})
   return isMobile ? children : null
 }
